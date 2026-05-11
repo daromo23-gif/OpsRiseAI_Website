@@ -186,7 +186,6 @@
       .footer-inner { flex-direction: column; }
       .footer-legal { flex-direction: column; text-align: center; }
       .nav-right { display: none; }
-      .hamburger { display: flex; }
     }
     .hamburger { display: none; flex-direction: column; justify-content: center; gap: 5px; background: none; border: none; cursor: pointer; padding: 6px; }
     .hamburger span { display: block; width: 22px; height: 2px; background: var(--cream); border-radius: 2px; transition: transform 200ms, opacity 200ms; }
@@ -199,6 +198,7 @@
     .nav-drawer .nav-cta { display: flex; align-items: center; justify-content: center; background: var(--ember); color: #F4F1EB; font-family: var(--font-mono); font-size: 13px; letter-spacing: 0.10em; text-transform: uppercase; text-decoration: none; padding: 14px; border-radius: 4px; margin-top: 16px; }
     .nav-mobile-row { display: none; align-items: center; gap: 10px; }
     @media (max-width: 768px) { .nav-mobile-row { display: flex; } }
+    @media (max-width: 768px) { .hamburger { display: flex; } }
   </style>
 </head>
 <body>

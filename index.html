@@ -188,7 +188,6 @@
       .footer-inner { flex-direction: column; }
       .footer-legal { flex-direction: column; text-align: center; }
       .nav-right { display: none; }
-      .hamburger { display: flex; }
     }
 
     /* ── HAMBURGER ── */
@@ -202,7 +201,9 @@
     .nav-drawer .nav-link { font-family: var(--font-mono); font-size: 13px; letter-spacing: 0.10em; text-transform: uppercase; color: var(--fg-2); text-decoration: none; padding: 16px 0; border-bottom: 1px solid var(--border); }
     .nav-drawer .nav-link:hover { color: var(--cream); }
     .nav-drawer .nav-cta { display: flex; align-items: center; justify-content: center; background: var(--ember); color: #F4F1EB; font-family: var(--font-mono); font-size: 13px; letter-spacing: 0.10em; text-transform: uppercase; text-decoration: none; padding: 14px; border-radius: 4px; margin-top: 16px; }
-    .nav-mobile-row { display: flex; align-items: center; gap: 10px; }
+    .nav-mobile-row { display: none; align-items: center; gap: 10px; }
+    @media (max-width: 768px) { .nav-mobile-row { display: flex; } }
+    @media (max-width: 768px) { .hamburger { display: flex; } }
   </style>
 </head>
 <body>
