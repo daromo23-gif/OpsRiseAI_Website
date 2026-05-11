@@ -121,7 +121,19 @@
       .footer { padding: 40px 20px 20px; }
       .footer-inner { flex-direction: column; }
       .footer-legal { flex-direction: column; text-align: center; }
+      .nav-right { display: none; }
+      .hamburger { display: flex; }
     }
+    .hamburger { display: none; flex-direction: column; justify-content: center; gap: 5px; background: none; border: none; cursor: pointer; padding: 6px; }
+    .hamburger span { display: block; width: 22px; height: 2px; background: var(--cream); border-radius: 2px; transition: transform 200ms, opacity 200ms; }
+    .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .hamburger.open span:nth-child(2) { opacity: 0; }
+    .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+    .nav-drawer { display: none; position: fixed; top: 64px; left: 0; right: 0; z-index: 49; background: rgba(22,20,18,0.97); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); border-bottom: 1px solid var(--border); padding: 8px 20px 24px; flex-direction: column; }
+    .nav-drawer.open { display: flex; }
+    .nav-drawer .nav-link { font-family: var(--font-mono); font-size: 13px; letter-spacing: 0.10em; text-transform: uppercase; color: var(--fg-2); text-decoration: none; padding: 16px 0; border-bottom: 1px solid var(--border); }
+    .nav-drawer .nav-cta { display: flex; align-items: center; justify-content: center; background: var(--ember); color: #F4F1EB; font-family: var(--font-mono); font-size: 13px; letter-spacing: 0.10em; text-transform: uppercase; text-decoration: none; padding: 14px; border-radius: 4px; margin-top: 16px; }
+    .nav-mobile-row { display: flex; align-items: center; gap: 10px; }
   </style>
 </head>
 <body>
@@ -138,7 +150,19 @@
       <button class="theme-toggle" id="theme-toggle" aria-label="Toggle theme"></button>
       <a href="index.html#contact" class="nav-cta">CONTACT →</a>
     </div>
+    <div class="nav-mobile-row">
+      <button class="theme-toggle" id="theme-toggle-mobile" aria-label="Toggle theme"></button>
+      <button class="hamburger" id="hamburger" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
   </nav>
+  <div class="nav-drawer" id="nav-drawer">
+    <a href="index.html#services" class="nav-link">SERVICES</a>
+    <a href="founder.html" class="nav-link">FOUNDER</a>
+    <a href="insights.html" class="nav-link">INSIGHTS</a>
+    <a href="index.html#contact" class="nav-cta">CONTACT →</a>
+  </div>
 
   <!-- ── PAGE HEADER ── -->
   <div class="page-header">
@@ -218,6 +242,11 @@
       syncIcon();
     });
 
+    document.getElementById('theme-toggle-mobile').addEventListener('click', () => { document.getElementById('theme-toggle').click(); });
+    const hamburger = document.getElementById('hamburger');
+    const navDrawer = document.getElementById('nav-drawer');
+    hamburger.addEventListener('click', () => { hamburger.classList.toggle('open'); navDrawer.classList.toggle('open'); });
+    navDrawer.querySelectorAll('a').forEach(a => a.addEventListener('click', () => { hamburger.classList.remove('open'); navDrawer.classList.remove('open'); }));
     const nav = document.getElementById('nav');
     window.addEventListener('scroll', () => { nav.classList.toggle('scrolled', window.scrollY > 10); }, { passive: true });
 
