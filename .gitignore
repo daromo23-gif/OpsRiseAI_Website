@@ -2,8 +2,7 @@
 temporary screenshots/
 *.zip
 *.pdf
-*.jpeg
-*.jpg
-*.png
 CLAUDE*.md
 .claude/
+WhatsApp Image*
+www.lucien*
