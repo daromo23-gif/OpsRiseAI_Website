@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8" />
+<title>Aula — Daniel Rojas</title>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Silkscreen:wght@400;700&family=DM+Serif+Display:ital@0;1&family=Space+Mono:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500;700&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="../../colors_and_type.css" />
+<style>
+  html, body, #root { margin: 0; padding: 0; height: 100%; }
+  body { background: var(--dr-ink); color: var(--dr-cream); font-family: var(--font-sans); font-weight: 300; -webkit-font-smoothing: antialiased; }
+</style>
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+</head>
+<body>
+<div id="root"></div>
+
+<script type="text/babel" src="Sidebar.jsx"></script>
+<script type="text/babel" src="TopBar.jsx"></script>
+<script type="text/babel" src="FlowCard.jsx"></script>
+<script type="text/babel" src="ChatComposer.jsx"></script>
+
+<script type="text/babel">
+const { Sidebar, TopBar, FlowCard, ChatComposer } = window;
+
+const flows = [
+  { name: 'Memo de descubrimiento', desc: 'De entrevista grabada a memo estructurado en formato propuesta.', tag: 'NÚCLEO', runs: 24, last: 'Hace 3 horas' },
+  { name: 'Análisis competitivo', desc: 'Compara 3-5 competidores y produce slide en formato Fortune 500.', tag: 'CASO REAL', runs: 11, last: 'Ayer' },
+  { name: 'Borrador de propuesta', desc: 'Toma resumen + presupuesto y arma propuesta lista para revisar.', tag: 'NÚCLEO', runs: 38, last: 'Hace 2 días' },
+  { name: 'Resumen ejecutivo', desc: 'Reduce un memo de 8 páginas a una página, conservando tu voz.', tag: 'AVANZADO', runs: 17, last: 'Hace 5 días' },
+];
+
+const App = () => {
+  const [active, setActive] = React.useState('home');
+  return (
+    <div style={{ display: 'flex', height: '100vh' }}>
+      <Sidebar active={active} onSelect={setActive} />
+      <main style={{ flex: 1, display: 'flex', flexDirection: 'column', overflow: 'hidden' }}>
+        <TopBar
+          title={active === 'flows' ? 'Mis flujos' : active === 'aula' ? 'Aula · Cohort 06' : 'Inicio'}
+          crumbs={['LUCÍA MENDIETA', active === 'flows' ? 'FLUJOS' : active === 'aula' ? 'AULA' : 'INICIO']}
+        />
+        {active === 'home' && (
+          <div style={{ padding: 32, overflow: 'auto', flex: 1 }}>
+            <div style={{ maxWidth: 1100, margin: '0 auto' }}>
+              <div style={{ display: 'grid', gridTemplateColumns: '2fr 1fr', gap: 24, marginBottom: 32 }}>
+                <section style={{ background: '#25221E', border: '1px solid rgba(216,210,200,0.12)', borderRadius: 10, padding: 24 }}>
+                  <div style={{ fontFamily: '"Space Mono", monospace', fontSize: 11, letterSpacing: '0.14em', textTransform: 'uppercase', color: '#D85A2B', marginBottom: 14 }}>// AGENTE PERSONAL</div>
+                  <ChatComposer />
+                </section>
+                <section style={{ background: '#322723', border: '1px solid rgba(216,90,43,0.30)', borderRadius: 10, padding: 24 }}>
+                  <div style={{ fontFamily: '"Space Mono", monospace', fontSize: 11, letterSpacing: '0.14em', textTransform: 'uppercase', color: '#D85A2B', marginBottom: 12 }}>// PRÓXIMA SESIÓN</div>
+                  <h3 style={{ fontFamily: '"DM Serif Display", serif', fontWeight: 400, fontSize: 22, color: '#F4F1EB', margin: '0 0 10px', lineHeight: 1.15 }}>Sem 4 — Análisis cuantitativo sin código</h3>
+                  <p style={{ fontFamily: '"DM Sans", sans-serif', fontWeight: 300, fontSize: 13, lineHeight: 1.55, color: '#C9C1B3', margin: '0 0 16px' }}>Jueves 18 sept · 19:00 CET. En vivo con Daniel.</p>
+                  <button style={{ background: '#D85A2B', color: '#F4F1EB', border: 'none', padding: '10px 14px', borderRadius: 4, fontFamily: '"Space Mono", monospace', fontSize: 12, letterSpacing: '0.10em', textTransform: 'uppercase', cursor: 'pointer', width: '100%' }}>UNIRME →</button>
+                  <div style={{ marginTop: 22, paddingTop: 18, borderTop: '1px solid rgba(216,210,200,0.10)' }}>
+                    <div style={{ fontFamily: '"Space Mono", monospace', fontSize: 10, letterSpacing: '0.14em', color: '#8C8377', textTransform: 'uppercase', marginBottom: 10 }}>// PROGRESO</div>
+                    <div style={{ display: 'flex', gap: 4, marginBottom: 8 }}>
+                      {[1,2,3,4,5,6].map(i => (
+                        <div key={i} style={{ flex: 1, height: 6, borderRadius: 1, background: i <= 3 ? '#D85A2B' : 'rgba(216,210,200,0.15)' }} />
+                      ))}
+                    </div>
+                    <div style={{ fontFamily: '"Space Mono", monospace', fontSize: 10, color: '#8C8377', letterSpacing: '0.04em' }}>3 / 6 SEMANAS</div>
+                  </div>
+                </section>
+              </div>
+
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', marginBottom: 16 }}>
+                <h2 style={{ fontFamily: '"DM Serif Display", serif', fontWeight: 400, fontSize: 24, color: '#F4F1EB', margin: 0 }}>Tus flujos</h2>
+                <span style={{ fontFamily: '"Space Mono", monospace', fontSize: 11, letterSpacing: '0.10em', textTransform: 'uppercase', color: '#8C8377' }}>{flows.length} ACTIVOS</span>
+              </div>
+              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: 16 }}>
+                {flows.map(f => <FlowCard key={f.name} {...f} />)}
+              </div>
+            </div>
+          </div>
+        )}
+        {active !== 'home' && (
+          <div style={{ padding: 32, overflow: 'auto', flex: 1 }}>
+            <div style={{ maxWidth: 1100, margin: '0 auto', textAlign: 'center', paddingTop: 80 }}>
+              <div style={{ fontFamily: '"Silkscreen", monospace', fontWeight: 700, fontSize: 28, color: '#D85A2B', marginBottom: 10 }}>VACÍO</div>
+              <p style={{ fontFamily: '"DM Sans", sans-serif', fontWeight: 300, fontSize: 16, color: '#C9C1B3' }}>Esta vista está intencionalmente en blanco — solo "Inicio" está implementada en este UI kit.</p>
+            </div>
+          </div>
+        )}
+      </main>
+    </div>
+  );
+};
+
+ReactDOM.createRoot(document.getElementById('root')).render(<App />);
+</script>
+</body>
+</html>

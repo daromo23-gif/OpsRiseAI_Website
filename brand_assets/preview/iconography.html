@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8" /><title>Iconography</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="../colors_and_type.css" />
+<style>
+  html,body{margin:0;padding:0;}
+  body{background:var(--dr-ink);color:var(--dr-cream);}
+  .wrap{width:700px;padding:22px 24px;box-sizing:border-box;}
+  .row{display:grid;grid-template-columns:repeat(6,1fr);gap:14px;}
+  .cell{display:flex;flex-direction:column;align-items:center;gap:10px;}
+  .ic{width:44px;height:44px;border:1px solid rgba(216,210,200,0.16);border-radius:6px;display:grid;place-items:center;}
+  svg{width:22px;height:22px;}
+  .lbl{font-family:"Space Mono";font-size:10px;letter-spacing:0.10em;text-transform:uppercase;color:var(--dr-stone);}
+  .meta{margin-top:14px;font-family:"Space Mono";font-size:10px;letter-spacing:0.14em;text-transform:uppercase;color:var(--dr-ember);}
+  .meta::before{content:"// ";opacity:0.7;}
+</style>
+</head><body>
+  <div class="wrap">
+    <div class="row">
+      <div class="cell"><div class="ic">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 8v8M8 12h8" stroke="#D85A2B"/></svg>
+      </div><div class="lbl">Add</div></div>
+
+      <div class="cell"><div class="ic">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"/><path d="M14 3v6h6" stroke="#D85A2B"/><path d="M8 13h8M8 17h6"/></svg>
+      </div><div class="lbl">Doc</div></div>
+
+      <div class="cell"><div class="ic">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3 2 21h20L12 3z"/><path d="M12 10v5" stroke="#D85A2B"/><circle cx="12" cy="18" r="0.7" fill="#D85A2B" stroke="#D85A2B"/></svg>
+      </div><div class="lbl">Alert</div></div>
+
+      <div class="cell"><div class="ic">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="m8 12 3 3 5-6" stroke="#D85A2B"/></svg>
+      </div><div class="lbl">Check</div></div>
+
+      <div class="cell"><div class="ic">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="M12 3v13M7 8l5-5 5 5" stroke="#D85A2B"/></svg>
+      </div><div class="lbl">Upload</div></div>
+
+      <div class="cell"><div class="ic">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7" stroke="#D85A2B"/><path d="m20 20-4-4"/></svg>
+      </div><div class="lbl">Search</div></div>
+    </div>
+    <div class="meta">Estilo: Monoline · Stroke 1.5 · Sin relleno · Acento Ember en elemento principal</div>
+  </div>
+</body></html>

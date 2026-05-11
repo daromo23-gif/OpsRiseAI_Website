@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8" /><title>Semantic colors — dark</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400&family=DM+Sans:wght@300;400&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="../colors_and_type.css" />
+<style>
+  html,body{margin:0;padding:0;}
+  body{background:#0E0D0B;font-family:var(--font-sans);font-weight:300;color:var(--dr-cream);}
+  .wrap{width:700px;box-sizing:border-box;display:grid;grid-template-columns:1fr 1fr;}
+  .pane{padding:16px 20px;}
+  .pane.dark{background:var(--dr-ink);}
+  .pane.light{background:var(--dr-cream);color:var(--dr-ink);}
+  .title{font-family:var(--font-mono);font-size:10px;letter-spacing:0.14em;text-transform:uppercase;margin-bottom:14px;}
+  .title.dark{color:var(--dr-ember);}
+  .title.light{color:var(--dr-ember);}
+  .row{display:flex;align-items:center;gap:10px;margin-bottom:8px;}
+  .chip{width:18px;height:18px;border-radius:3px;flex-shrink:0;}
+  .name{font-family:var(--font-mono);font-size:11px;letter-spacing:0.04em;}
+  .desc{font-size:11px;opacity:0.7;margin-left:auto;}
+  .b-dark{border:1px solid rgba(216,210,200,0.18);}
+  .b-light{border:1px solid #D8D2C8;}
+</style>
+</head><body>
+  <div class="wrap">
+    <div class="pane dark">
+      <div class="title dark">Dark theme</div>
+      <div class="row"><div class="chip" style="background:#1C1A17;border:1px solid rgba(216,210,200,0.18)"></div><div class="name">--bg</div><div class="desc">page</div></div>
+      <div class="row"><div class="chip b-dark" style="background:#25221E"></div><div class="name">--bg-elev-1</div><div class="desc">elev 1</div></div>
+      <div class="row"><div class="chip b-dark" style="background:#2F2B26"></div><div class="name">--bg-elev-2</div><div class="desc">card</div></div>
+      <div class="row"><div class="chip" style="background:#F4F1EB"></div><div class="name">--fg-1</div><div class="desc">primary text</div></div>
+      <div class="row"><div class="chip" style="background:#C9C1B3"></div><div class="name">--fg-2</div><div class="desc">secondary</div></div>
+      <div class="row"><div class="chip" style="background:#8C8377"></div><div class="name">--fg-3</div><div class="desc">muted</div></div>
+      <div class="row"><div class="chip" style="background:#D85A2B"></div><div class="name">--accent</div><div class="desc">CTA</div></div>
+    </div>
+    <div class="pane light">
+      <div class="title light">Light theme</div>
+      <div class="row"><div class="chip b-light" style="background:#F4F1EB"></div><div class="name">--bg</div><div class="desc">page</div></div>
+      <div class="row"><div class="chip b-light" style="background:#FFFFFF"></div><div class="name">--bg-elev-1</div><div class="desc">elev 1</div></div>
+      <div class="row"><div class="chip b-light" style="background:#FFFFFF"></div><div class="name">--bg-elev-2</div><div class="desc">card</div></div>
+      <div class="row"><div class="chip" style="background:#1C1A17"></div><div class="name">--fg-1</div><div class="desc">primary text</div></div>
+      <div class="row"><div class="chip" style="background:#4A463F"></div><div class="name">--fg-2</div><div class="desc">secondary</div></div>
+      <div class="row"><div class="chip" style="background:#8C8377"></div><div class="name">--fg-3</div><div class="desc">muted</div></div>
+      <div class="row"><div class="chip" style="background:#D85A2B"></div><div class="name">--accent</div><div class="desc">CTA</div></div>
+    </div>
+  </div>
+</body></html>

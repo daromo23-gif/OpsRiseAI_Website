@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8" /><title>Form inputs</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400&family=DM+Sans:wght@300;400&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="../colors_and_type.css" />
+<style>
+  html,body{margin:0;padding:0;}
+  body{background:var(--dr-ink);color:var(--dr-cream);font-family:"DM Sans";font-weight:300;}
+  .wrap{width:700px;padding:22px 24px;box-sizing:border-box;display:grid;grid-template-columns:1fr 1fr;gap:18px;}
+  .field{display:flex;flex-direction:column;gap:6px;}
+  label{font-family:"Space Mono";font-size:10px;letter-spacing:0.14em;text-transform:uppercase;color:var(--dr-stone);}
+  label::before{content:"// ";color:var(--dr-ember);}
+  input,select{font-family:"DM Sans";font-weight:300;font-size:14px;background:#25221E;color:var(--dr-cream);border:1px solid rgba(216,210,200,0.18);border-radius:4px;padding:10px 12px;outline:none;}
+  input:focus{border-color:var(--dr-ember);box-shadow:0 0 0 2px rgba(216,90,43,0.25);}
+  .check{display:flex;align-items:center;gap:10px;font-size:13px;}
+  .check input[type=checkbox]{appearance:none;width:16px;height:16px;border:1px solid rgba(216,210,200,0.4);border-radius:3px;background:#25221E;display:grid;place-items:center;cursor:pointer;}
+  .check input[type=checkbox]:checked{background:var(--dr-ember);border-color:var(--dr-ember);}
+  .check input[type=checkbox]:checked::after{content:"✓";color:var(--dr-cream);font-size:11px;font-family:"Space Mono";}
+  .help{font-size:11px;color:var(--dr-stone);font-family:"Space Mono";}
+</style>
+</head><body>
+  <div class="wrap">
+    <div class="field"><label>Email</label><input value="daniel@danielrojas.ai" /><span class="help">Recibirás un código por correo.</span></div>
+    <div class="field"><label>Industria</label><select><option>Consultoría estratégica</option><option>Finanzas</option><option>Tecnología</option></select></div>
+    <div class="field" style="grid-column:1/-1;"><label class="check"><input type="checkbox" checked /> Acepto recibir lecciones por email</label></div>
+  </div>
+</body></html>

@@ -1,0 +1,301 @@
+/* ============================================================
+   Daniel Rojas — Design Tokens
+   Source: uploads/daniel-rojas-brand-guidelines.pdf (v1.0 / 2026)
+   ============================================================ */
+
+/* ---------- Webfonts (Google Fonts CDN) ----------
+   Silkscreen, DM Serif Display, Space Mono, DM Sans
+   are all available from Google Fonts. Import once
+   from the html <head>:
+
+   <link rel="preconnect" href="https://fonts.googleapis.com" />
+   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+   <link href="https://fonts.googleapis.com/css2?family=Silkscreen:wght@400;700&family=DM+Serif+Display:ital@0;1&family=Space+Mono:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500;700&display=swap" rel="stylesheet" />
+*/
+
+:root {
+  /* ---------- Brand palette (raw) ---------- */
+  --dr-ink:           #1C1A17;   /* Principal · Fondos */
+  --dr-cream:         #F4F1EB;   /* Fondo claro · Superficies */
+  --dr-ember:         #D85A2B;   /* Acento · CTAs · Énfasis */
+  --dr-stone:         #8C8377;   /* Texto secundario */
+  --dr-ember-light:   #F8C4B0;   /* Tags · Badges suaves */
+  --dr-line:          #D8D2C8;   /* Bordes · Divisores */
+
+  /* Auxiliary tints (computed for surfaces, hovers, focus rings) */
+  --dr-ink-2:         #25221E;   /* Slightly elevated on Ink */
+  --dr-ink-3:         #2F2B26;   /* Card / panel on Ink */
+  --dr-ink-4:         #3A352F;   /* Hover over Ink-3 */
+  --dr-ember-hover:   #BF4D22;   /* Ember pressed/hover */
+  --dr-ember-tint:    rgba(216, 90, 43, 0.12);
+  --dr-cream-2:       #ECE7DD;   /* Pressed / hovered cream */
+
+  /* ---------- Semantic tokens (default = Dark / Ink theme) ----------
+     The brand prefers the Ink (dark) background. Light theme below
+     under [data-theme="light"]. */
+  --bg:               var(--dr-ink);
+  --bg-elev-1:        var(--dr-ink-2);
+  --bg-elev-2:        var(--dr-ink-3);
+  --bg-hover:         var(--dr-ink-4);
+
+  --fg-1:             var(--dr-cream);     /* Primary text */
+  --fg-2:             #C9C1B3;             /* Secondary text on dark */
+  --fg-3:             var(--dr-stone);     /* Tertiary / muted */
+  --fg-on-ember:      var(--dr-cream);     /* Text on Ember CTAs */
+
+  --accent:           var(--dr-ember);
+  --accent-hover:     var(--dr-ember-hover);
+  --accent-soft:      var(--dr-ember-light);
+  --accent-tint:      var(--dr-ember-tint);
+
+  --border:           rgba(216, 210, 200, 0.12);  /* Line @ low opacity on dark */
+  --border-strong:    rgba(216, 210, 200, 0.22);
+  --divider:          rgba(216, 210, 200, 0.08);
+
+  /* Status (derived to fit warm palette) */
+  --success:          #6BA368;
+  --warning:          #E0A04A;
+  --danger:           #C7503B;
+  --info:             #6E8FB8;
+
+  /* ---------- Type families ---------- */
+  --font-display:     "Silkscreen", "Courier New", ui-monospace, monospace;
+  --font-serif:       "DM Serif Display", "Iowan Old Style", Georgia, serif;
+  --font-mono:        "Space Mono", ui-monospace, "SF Mono", Menlo, monospace;
+  --font-sans:        "DM Sans", "Inter", system-ui, -apple-system, "Helvetica Neue", Arial, sans-serif;
+
+  /* ---------- Type scale ---------- */
+  --fs-display:       64px;   /* Hero headlines (Silkscreen) */
+  --fs-h1:            48px;   /* DM Serif Display */
+  --fs-h2:            36px;
+  --fs-h3:            28px;
+  --fs-h4:            22px;
+  --fs-body-lg:       18px;
+  --fs-body:          16px;
+  --fs-body-sm:       14px;
+  --fs-caption:       12px;
+  --fs-mono-label:    12px;   /* Space Mono uppercase labels */
+
+  --lh-tight:         1.05;
+  --lh-snug:          1.2;
+  --lh-normal:        1.5;
+  --lh-loose:         1.65;
+
+  --ls-tight:         -0.01em;
+  --ls-normal:        0;
+  --ls-mono:          0.04em;
+  --ls-mono-cta:      0.10em;   /* Buttons */
+  --ls-mono-eyebrow:  0.14em;   /* "// SECTION" labels */
+
+  /* ---------- Spacing ---------- */
+  --space-0:          0;
+  --space-1:          4px;
+  --space-2:          8px;
+  --space-3:          12px;
+  --space-4:          16px;
+  --space-5:          24px;
+  --space-6:          32px;
+  --space-7:          48px;
+  --space-8:          64px;
+  --space-9:          96px;
+  --space-10:         128px;
+
+  /* ---------- Radii ---------- */
+  --radius-xs:        2px;
+  --radius-sm:        4px;     /* Default for buttons & inputs */
+  --radius-md:        6px;
+  --radius-lg:        10px;
+  --radius-xl:        16px;
+  --radius-pill:      999px;
+
+  /* ---------- Borders ---------- */
+  --border-width:     1px;
+  --border-width-2:   2px;
+
+  /* ---------- Shadows / elevation ---------- */
+  --shadow-1:         0 1px 0 rgba(0,0,0,0.20);
+  --shadow-2:         0 2px 8px rgba(0,0,0,0.30);
+  --shadow-3:         0 8px 24px rgba(0,0,0,0.40);
+  --shadow-ember:     0 0 0 1px rgba(216, 90, 43, 0.35),
+                      0 6px 20px rgba(216, 90, 43, 0.25);
+  --focus-ring:       0 0 0 2px var(--bg),
+                      0 0 0 4px var(--dr-ember);
+
+  /* ---------- Motion ---------- */
+  --ease-out:         cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in-out:      cubic-bezier(0.65, 0, 0.35, 1);
+  --dur-fast:         120ms;
+  --dur-base:         200ms;
+  --dur-slow:         400ms;
+
+  /* ---------- Layout ---------- */
+  --container:        1200px;
+  --container-narrow: 880px;
+  --grid-gutter:      24px;
+
+  color-scheme: dark;
+}
+
+/* ---------- Light theme (Cream) ----------
+   Use on landing pages, docs, light marketing surfaces. */
+[data-theme="light"] {
+  --bg:               var(--dr-cream);
+  --bg-elev-1:        #FFFFFF;
+  --bg-elev-2:        #FFFFFF;
+  --bg-hover:         var(--dr-cream-2);
+
+  --fg-1:             var(--dr-ink);
+  --fg-2:             #4A463F;
+  --fg-3:             var(--dr-stone);
+
+  --border:           var(--dr-line);
+  --border-strong:    #C5BEB1;
+  --divider:          rgba(28, 26, 23, 0.08);
+
+  --shadow-1:         0 1px 0 rgba(28, 26, 23, 0.06);
+  --shadow-2:         0 2px 8px rgba(28, 26, 23, 0.08);
+  --shadow-3:         0 8px 24px rgba(28, 26, 23, 0.10);
+
+  color-scheme: light;
+}
+
+/* ============================================================
+   Element defaults — opt-in by adding `class="dr"` to <body>
+   or scoping via a wrapper. Use semantic classes if you don't
+   want global element styles.
+   ============================================================ */
+
+.dr,
+.dr * {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.dr {
+  background: var(--bg);
+  color: var(--fg-1);
+  font-family: var(--font-sans);
+  font-weight: 300;            /* DM Sans Light */
+  font-size: var(--fs-body);
+  line-height: var(--lh-normal);
+}
+
+/* Headings — DM Serif Display by default; .dr-display for Silkscreen */
+.dr h1, .dr-h1 {
+  font-family: var(--font-serif);
+  font-weight: 400;
+  font-size: var(--fs-h1);
+  line-height: var(--lh-snug);
+  letter-spacing: var(--ls-tight);
+  margin: 0 0 var(--space-4);
+  color: var(--fg-1);
+}
+.dr h2, .dr-h2 {
+  font-family: var(--font-serif);
+  font-weight: 400;
+  font-size: var(--fs-h2);
+  line-height: var(--lh-snug);
+  margin: 0 0 var(--space-4);
+}
+.dr h3, .dr-h3 {
+  font-family: var(--font-serif);
+  font-weight: 400;
+  font-size: var(--fs-h3);
+  line-height: var(--lh-snug);
+  margin: 0 0 var(--space-3);
+}
+.dr h4, .dr-h4 {
+  font-family: var(--font-sans);
+  font-weight: 500;
+  font-size: var(--fs-h4);
+  line-height: var(--lh-snug);
+  margin: 0 0 var(--space-3);
+}
+
+/* Display headline — pixel/technical Silkscreen, used sparingly */
+.dr-display {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: var(--fs-display);
+  line-height: 1;
+  text-transform: uppercase;
+  letter-spacing: 0;
+  color: var(--fg-1);
+}
+
+/* Eyebrow / kicker — "// SECTION TITLE" */
+.dr-eyebrow {
+  font-family: var(--font-mono);
+  font-weight: 400;
+  font-size: var(--fs-mono-label);
+  text-transform: uppercase;
+  letter-spacing: var(--ls-mono-eyebrow);
+  color: var(--accent);
+}
+.dr-eyebrow::before {
+  content: "// ";
+  opacity: 0.7;
+}
+
+.dr p, .dr-p {
+  font-family: var(--font-sans);
+  font-weight: 300;
+  font-size: var(--fs-body);
+  line-height: var(--lh-loose);
+  color: var(--fg-1);
+  margin: 0 0 var(--space-4);
+  text-wrap: pretty;
+}
+
+.dr-lead {
+  font-size: var(--fs-body-lg);
+  line-height: var(--lh-loose);
+  color: var(--fg-2);
+}
+
+.dr small, .dr-small {
+  font-size: var(--fs-body-sm);
+  color: var(--fg-3);
+}
+
+/* Mono labels — uppercase, tracked, used as tags / metadata / chips */
+.dr-label {
+  font-family: var(--font-mono);
+  font-weight: 400;
+  font-size: var(--fs-mono-label);
+  text-transform: uppercase;
+  letter-spacing: var(--ls-mono);
+  color: var(--fg-3);
+}
+
+.dr code, .dr-code {
+  font-family: var(--font-mono);
+  font-size: 0.92em;
+  background: var(--bg-elev-2);
+  border: 1px solid var(--border);
+  padding: 0.1em 0.4em;
+  border-radius: var(--radius-xs);
+  color: var(--fg-1);
+}
+
+.dr a, .dr-link {
+  color: var(--accent);
+  text-decoration: none;
+  border-bottom: 1px solid var(--accent-tint);
+  transition: border-color var(--dur-fast) var(--ease-out);
+}
+.dr a:hover, .dr-link:hover {
+  border-bottom-color: var(--accent);
+}
+
+.dr hr, .dr-divider {
+  border: 0;
+  border-top: 1px solid var(--divider);
+  margin: var(--space-6) 0;
+}
+
+/* Selection */
+.dr ::selection {
+  background: var(--accent);
+  color: var(--fg-on-ember);
+}

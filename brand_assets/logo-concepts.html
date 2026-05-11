@@ -1,0 +1,192 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>OpsRiseAI — Logo concepts</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Silkscreen:wght@400;700&family=DM+Serif+Display:ital@0;1&family=Space+Mono:wght@400;700&family=DM+Sans:wght@300;400;500;700&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="colors_and_type.css" />
+<style>
+  :root { --ink:#1C1A17; --cream:#F4F1EB; --ember:#D85A2B; --stone:#8C8377; --line:rgba(216,210,200,0.12); }
+  html, body { margin: 0; padding: 0; }
+  body {
+    background: var(--ink); color: var(--cream);
+    font-family: "DM Sans", sans-serif; font-weight: 300;
+    padding: 56px 48px 96px; -webkit-font-smoothing: antialiased;
+  }
+  .head { max-width: 1180px; margin: 0 auto 40px; }
+  .eyebrow { font-family: "Space Mono", monospace; font-size: 12px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--ember); margin-bottom: 14px; }
+  .eyebrow::before { content: "// "; opacity: 0.7; }
+  h1 { font-family: "DM Serif Display", serif; font-weight: 400; font-size: 44px; line-height: 1.1; margin: 0 0 14px; color: var(--cream); }
+  .lede { font-size: 16px; line-height: 1.6; color: #C9C1B3; max-width: 680px; margin: 0; }
+
+  .grid { max-width: 1180px; margin: 0 auto; display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; }
+  .card { background: #25221E; border: 1px solid var(--line); border-radius: 10px; overflow: hidden; display: flex; flex-direction: column; }
+  .stage { height: 240px; display: grid; place-items: center; border-bottom: 1px solid var(--line); background: var(--ink); position: relative; overflow: hidden; }
+  .stage .dots { position: absolute; inset: 0; background-image: radial-gradient(rgba(244,241,235,0.05) 1px, transparent 1px); background-size: 24px 24px; }
+  .stage.cream { background: var(--cream); color: var(--ink); }
+  .stage.ember { background: var(--ember); color: var(--cream); }
+  .meta { padding: 18px 22px 22px; display: flex; flex-direction: column; gap: 8px; }
+  .num { font-family: "Space Mono", monospace; font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--ember); }
+  .num::before { content: "// CONCEPT "; opacity: 0.7; }
+  .name { font-family: "DM Serif Display", serif; font-size: 22px; line-height: 1.15; margin: 0; }
+  .desc { font-size: 13px; line-height: 1.55; color: #C9C1B3; margin: 0; }
+  .tags { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 4px; }
+  .tag { font-family: "Space Mono", monospace; font-size: 10px; letter-spacing: 0.10em; text-transform: uppercase; color: var(--stone); border: 1px solid var(--line); padding: 3px 8px; border-radius: 3px; }
+  .wordmark-row { display: flex; align-items: center; gap: 14px; z-index: 1; }
+  .wordmark { font-family: "Silkscreen", monospace; font-weight: 700; font-size: 30px; letter-spacing: 0.02em; text-transform: uppercase; }
+  .wordmark .ai { color: var(--ember); }
+  .stage.ember .wordmark .ai { color: var(--ink); }
+  .mono-stack { font-family: "Space Mono", monospace; font-size: 22px; letter-spacing: 0.06em; line-height: 1.2; text-transform: uppercase; }
+  .mono-stack .accent { color: var(--ember); }
+  .mono-stack .slash { color: var(--ember); }
+</style>
+</head>
+<body>
+  <div class="head">
+    <div class="eyebrow">OPSRISEAI · LOGO EXPLORATION · V0.2</div>
+    <h1>Six directions for the OpsRiseAI logo.</h1>
+    <p class="lede">
+      Every option uses only the palette and the four type families already
+      approved in the system (Silkscreen, DM Serif Display, Space Mono, DM Sans).
+      Pick the one(s) you want taken to final and I'll deliver the full lockup,
+      isolated mark, and three color variants.
+    </p>
+  </div>
+
+  <div class="grid">
+
+    <div class="card">
+      <div class="stage">
+        <div class="dots"></div>
+        <div class="wordmark-row">
+          <svg width="64" height="64" viewBox="0 0 64 64" fill="none" aria-hidden="true">
+            <rect x="6"  y="40" width="8" height="18" fill="#F4F1EB"/>
+            <rect x="20" y="30" width="8" height="28" fill="#F4F1EB"/>
+            <rect x="34" y="18" width="8" height="40" fill="#F4F1EB"/>
+            <rect x="48" y="6"  width="8" height="52" fill="#D85A2B"/>
+          </svg>
+          <div class="wordmark">OPSRISE<span class="ai">.AI</span></div>
+        </div>
+      </div>
+      <div class="meta">
+        <div class="num">01 — PIXEL RISE</div>
+        <h3 class="name">Step bars + Silkscreen wordmark</h3>
+        <p class="desc">The mark reads as an ops chart climbing. The last bar in Ember is the "rise." Silkscreen ties it into the system's technical/pixel voice from the first frame.</p>
+        <div class="tags"><span class="tag">Silkscreen</span><span class="tag">Pixel bars</span><span class="tag">Most editorial</span></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="stage cream">
+        <div class="wordmark-row">
+          <div class="mono-stack" style="color: var(--ink);">
+            <span class="slash">//</span> OPSRISE<br/>
+            <span style="margin-left:2.4em;" class="accent">↗ AI</span>
+          </div>
+        </div>
+      </div>
+      <div class="meta">
+        <div class="num">02 — SLASH MARK</div>
+        <h3 class="name">The system's "//" as the logo anchor</h3>
+        <p class="desc">Reuses the system's signature punctuation as a prefix to the name, with an Ember "↗" carrying the "rise." Feels native to the brand on day one.</p>
+        <div class="tags"><span class="tag">Space Mono</span><span class="tag">Pure type</span><span class="tag">Light variant</span></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="stage">
+        <div class="dots"></div>
+        <div class="wordmark-row">
+          <svg width="64" height="64" viewBox="0 0 64 64" fill="none" stroke="#F4F1EB" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <rect x="4" y="4" width="56" height="56" rx="6" />
+            <path d="M16 48 L32 32 L48 16" stroke="#D85A2B"/>
+            <circle cx="16" cy="48" r="3" fill="#F4F1EB" stroke="none"/>
+            <circle cx="32" cy="32" r="4" fill="#D85A2B" stroke="none"/>
+            <circle cx="48" cy="16" r="3" fill="#F4F1EB" stroke="none"/>
+          </svg>
+          <div style="display:flex; flex-direction:column; line-height:1; gap:6px;">
+            <span style="font-family: 'DM Serif Display', serif; font-size: 28px; color: var(--cream);">OpsRise</span>
+            <span style="font-family: 'Space Mono', monospace; font-size: 11px; letter-spacing:0.18em; color: var(--ember); text-transform: uppercase;">// AI · CONSULTING</span>
+          </div>
+        </div>
+      </div>
+      <div class="meta">
+        <div class="num">03 — NODE / CIRCUIT</div>
+        <h3 class="name">Node mark + DM Serif lockup</h3>
+        <p class="desc">Honors the idea behind the original logomark (a node inside a system) but with an explicit ascending diagonal. Serif lockup makes it read more editorial than techy.</p>
+        <div class="tags"><span class="tag">DM Serif</span><span class="tag">Monoline 1.5</span><span class="tag">Closest to existing</span></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="stage ember">
+        <div class="wordmark-row">
+          <div class="mono-stack" style="color: var(--cream); font-size:24px;">
+            [&nbsp;OPS<span style="color: var(--ink);">·</span>RISE&nbsp;] <span style="color: var(--ink);">.AI</span>
+          </div>
+        </div>
+      </div>
+      <div class="meta">
+        <div class="num">04 — BRACKET MARK</div>
+        <h3 class="name">System in brackets</h3>
+        <p class="desc">Reads like a parameter in a script: "Ops is the variable that's rising." Pure monospace. Works as favicon at 16×16, footers, watermarks, terminal output, anything technical.</p>
+        <div class="tags"><span class="tag">Space Mono</span><span class="tag">On Ember</span><span class="tag">Favicon-friendly</span></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="stage">
+        <div class="dots"></div>
+        <div class="wordmark-row">
+          <svg width="78" height="78" viewBox="0 0 78 78" fill="none" aria-hidden="true">
+            <rect x="1" y="1" width="76" height="76" rx="6" stroke="#F4F1EB" stroke-width="1.5"/>
+            <text x="39" y="44" text-anchor="middle" dominant-baseline="middle" style="font-family: 'Silkscreen', monospace; font-weight: 700; font-size: 30px; fill: #F4F1EB;">OR</text>
+            <rect x="1" y="64" width="76" height="13" fill="#D85A2B"/>
+            <text x="39" y="74" text-anchor="middle" dominant-baseline="middle" style="font-family: 'Space Mono', monospace; font-size: 8px; fill: #1C1A17; letter-spacing: 0.18em;">.AI</text>
+          </svg>
+          <div style="display:flex; flex-direction:column; gap:6px; line-height:1;">
+            <span style="font-family: 'DM Serif Display', serif; font-size: 32px; color: var(--cream);">OpsRise<span style="color: var(--ember);">.AI</span></span>
+            <span style="font-family: 'Space Mono', monospace; font-size: 10px; letter-spacing:0.18em; color: var(--stone); text-transform: uppercase;">SYSTEMS · CONSULTING · 2026</span>
+          </div>
+        </div>
+      </div>
+      <div class="meta">
+        <div class="num">05 — OR MONOGRAM</div>
+        <h3 class="name">"OR" seal + full lockup</h3>
+        <p class="desc">Gives you a square, standalone mark (the "OR" seal sitting above an Ember .AI strip) that survives at small sizes. The horizontal lockup covers marketing and product surfaces.</p>
+        <div class="tags"><span class="tag">Monogram</span><span class="tag">Mark + lockup</span><span class="tag">Most corporate</span></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="stage">
+        <div class="dots"></div>
+        <div class="wordmark-row">
+          <svg width="64" height="64" viewBox="0 0 64 64" fill="none" aria-hidden="true">
+            <rect x="2" y="2" width="60" height="60" rx="4" fill="#D85A2B"/>
+            <path d="M18 46 L46 18 M30 18 H46 V34" stroke="#F4F1EB" stroke-width="3" stroke-linecap="square" stroke-linejoin="miter"/>
+          </svg>
+          <div style="display:flex; flex-direction:column; gap:4px; line-height:1;">
+            <span style="font-family: 'DM Serif Display', serif; font-size: 30px; color: var(--cream);">OpsRiseAI</span>
+            <span style="font-family: 'Space Mono', monospace; font-size: 10px; letter-spacing:0.18em; color: var(--stone); text-transform: uppercase;">// AI FOR OPERATIONS</span>
+          </div>
+        </div>
+      </div>
+      <div class="meta">
+        <div class="num">06 — ARROW STAMP</div>
+        <h3 class="name">Ember block with NE arrow</h3>
+        <p class="desc">The most "trademark-able" of the set — a solid Ember stamp with the rise arrow. Excellent as an app icon or avatar. Zero ambiguity about "rise."</p>
+        <div class="tags"><span class="tag">App icon</span><span class="tag">Solid stamp</span><span class="tag">Most commercial</span></div>
+      </div>
+    </div>
+
+  </div>
+
+  <div style="max-width:1180px; margin: 40px auto 0; padding-top:28px; border-top:1px solid var(--line); font-family: 'Space Mono', monospace; font-size: 11px; letter-spacing:0.10em; text-transform: uppercase; color: var(--stone); display:flex; justify-content:space-between;">
+    <span>// NEXT — TELL ME WHICH NUMBER(S) TO TAKE TO FINAL</span>
+    <span>V0.2 · 2026</span>
+  </div>
+</body>
+</html>

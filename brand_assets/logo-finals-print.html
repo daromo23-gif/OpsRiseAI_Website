@@ -1,0 +1,326 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>OpsRiseAI — Logo finals · 02 Slash + 04 Bracket</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Silkscreen:wght@400;700&family=DM+Serif+Display:ital@0;1&family=Space+Mono:wght@400;700&family=DM+Sans:wght@300;400;500;700&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="colors_and_type.css" />
+<style>
+  :root { --ink:#1C1A17; --cream:#F4F1EB; --ember:#D85A2B; --stone:#8C8377; --line:rgba(216,210,200,0.12); --line-light:#D8D2C8; }
+  html, body { margin: 0; padding: 0; }
+  body { background: var(--ink); color: var(--cream); font-family: "DM Sans", sans-serif; font-weight: 300; padding: 56px 48px 96px; -webkit-font-smoothing: antialiased; }
+  .head { max-width: 1180px; margin: 0 auto 40px; }
+  .eyebrow { font-family: "Space Mono", monospace; font-size: 12px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--ember); margin-bottom: 14px; }
+  .eyebrow::before { content: "// "; opacity: 0.7; }
+  h1 { font-family: "DM Serif Display", serif; font-weight: 400; font-size: 44px; line-height: 1.1; margin: 0 0 14px; }
+  .lede { font-size: 16px; line-height: 1.6; color: #C9C1B3; max-width: 720px; margin: 0; }
+
+  .wrap { max-width: 1180px; margin: 0 auto; }
+  .section { margin-bottom: 56px; }
+  .section-head { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 20px; padding-bottom: 14px; border-bottom: 1px solid var(--line); }
+  .section-num { font-family: "Space Mono", monospace; font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--ember); }
+  .section-num::before { content: "// "; opacity: 0.7; }
+  .section-name { font-family: "DM Serif Display", serif; font-size: 28px; margin: 6px 0 0; }
+  .section-tag { font-family: "Space Mono", monospace; font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--stone); }
+
+  .row { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 14px; margin-bottom: 14px; }
+  .row.two { grid-template-columns: 2fr 1fr; }
+  .tile { border: 1px solid var(--line); border-radius: 10px; overflow: hidden; background: #25221E; display: flex; flex-direction: column; }
+  .stage { padding: 40px 28px; display: grid; place-items: center; min-height: 180px; position: relative; }
+  .stage.dark { background: var(--ink); color: var(--cream); border-bottom: 1px solid var(--line); }
+  .stage.cream { background: var(--cream); color: var(--ink); border-bottom: 1px solid var(--line-light); }
+  .stage.ember { background: var(--ember); color: var(--cream); border-bottom: 1px solid rgba(0,0,0,0.15); }
+  .stage .dots { position: absolute; inset: 0; background-image: radial-gradient(rgba(244,241,235,0.05) 1px, transparent 1px); background-size: 24px 24px; pointer-events: none; }
+  .tile-meta { padding: 12px 16px; display: flex; justify-content: space-between; align-items: center; }
+  .tile-meta .label { font-family: "Space Mono", monospace; font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--stone); }
+  .tile-meta .hex { font-family: "Space Mono", monospace; font-size: 10px; letter-spacing: 0.04em; color: var(--cream); }
+
+  /* ============ 02 — Slash Mark ============ */
+  .slash-lockup { font-family: "Space Mono", monospace; font-weight: 700; letter-spacing: 0.06em; line-height: 1.05; text-transform: uppercase; }
+  .slash-lockup .slash { color: var(--ember); }
+  .slash-lockup .ai { color: var(--ember); }
+  .slash-lockup.cream .slash, .slash-lockup.cream .ai { color: var(--ember); }
+  .slash-lockup.on-ember .slash, .slash-lockup.on-ember .ai { color: var(--ink); }
+
+  .slash-isolated { font-family: "Space Mono", monospace; font-weight: 700; font-size: 96px; letter-spacing: 0.04em; line-height: 1; color: var(--ember); }
+  .slash-stack {
+    display: inline-flex; flex-direction: column; gap: 4px; line-height: 1;
+  }
+  .slash-stack .top { font-size: 30px; }
+  .slash-stack .bot { font-size: 30px; margin-left: 2.6em; }
+  .slash-stack .bot .arrow { font-family: "DM Sans", sans-serif; font-weight: 500; }
+
+  /* ============ 04 — Bracket Mark ============ */
+  .bracket { font-family: "Space Mono", monospace; font-weight: 700; font-size: 30px; letter-spacing: 0.06em; line-height: 1; text-transform: uppercase; display: inline-flex; align-items: center; gap: 0.35em; }
+  .bracket .br { color: var(--ember); }
+  .bracket.cream .br { color: var(--ember); }
+  .bracket.on-ember .br, .bracket.on-ember .dot, .bracket.on-ember .ai { color: var(--ink); }
+  .bracket .dot { color: var(--ember); }
+  .bracket .ai { color: var(--ember); }
+
+  /* ============ Specs panel ============ */
+  .specs { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-top: 24px; padding: 24px; border: 1px solid var(--line); border-radius: 10px; background: #25221E; }
+  .spec h4 { font-family: "DM Serif Display", serif; font-weight: 400; font-size: 16px; margin: 0 0 10px; color: var(--cream); }
+  .spec ul { margin: 0; padding-left: 0; list-style: none; display: flex; flex-direction: column; gap: 6px; }
+  .spec li { font-family: "Space Mono", monospace; font-size: 11px; letter-spacing: 0.04em; color: #C9C1B3; }
+  .spec li b { color: var(--ember); font-weight: 400; }
+  .spec li b::before { content: "· "; }
+
+  /* Favicon tests */
+  .favicon-row { display: flex; align-items: center; gap: 18px; padding: 14px 0; }
+  .fav { border-radius: 4px; display: grid; place-items: center; overflow: hidden; }
+  .fav.s16 { width: 16px; height: 16px; }
+  .fav.s24 { width: 24px; height: 24px; }
+  .fav.s32 { width: 32px; height: 32px; }
+  .fav.s48 { width: 48px; height: 48px; }
+  .fav.s64 { width: 64px; height: 64px; }
+  .fav.s96 { width: 96px; height: 96px; }
+  .fav.dark-bg { background: var(--ink); }
+  .fav.ember-bg { background: var(--ember); }
+  .fav .glyph { font-family: "Space Mono", monospace; font-weight: 700; line-height: 1; }
+
+  /* ============ Print ============ */
+  @media print {
+    @page { size: A4 landscape; margin: 10mm; }
+    html, body {
+      background: var(--ink) !important;
+      -webkit-print-color-adjust: exact !important;
+      print-color-adjust: exact !important;
+      color-adjust: exact !important;
+    }
+    body { padding: 0 !important; }
+    .head { margin: 0 0 18px !important; max-width: none !important; }
+    .head h1 { font-size: 28px !important; margin-bottom: 8px !important; }
+    .head .lede { font-size: 12px !important; max-width: 100% !important; }
+    .wrap { max-width: none !important; }
+    .section { margin-bottom: 0 !important; break-before: page; break-inside: avoid; page-break-inside: avoid; }
+    .section:first-of-type { break-before: auto; }
+    .section-head { margin-bottom: 12px !important; padding-bottom: 8px !important; }
+    .section-name { font-size: 20px !important; }
+    .row { gap: 8px !important; margin-bottom: 8px !important; break-inside: avoid; page-break-inside: avoid; }
+    .stage { padding: 18px 14px !important; min-height: 110px !important; }
+    .row.two .stage { min-height: 110px !important; }
+    .tile { break-inside: avoid; page-break-inside: avoid; }
+    .tile-meta { padding: 8px 12px !important; }
+    .specs { padding: 14px !important; gap: 16px !important; margin-top: 12px !important; break-inside: avoid; page-break-inside: avoid; }
+    .spec h4 { margin-bottom: 6px !important; font-size: 14px !important; }
+    .spec li { font-size: 9.5px !important; }
+    .slash-isolated { font-size: 64px !important; }
+    .favicon-row { gap: 12px !important; padding: 6px 0 !important; }
+    /* hide the footer on the second section page to keep things clean */
+    body > div:last-of-type { break-before: page; }
+    * { transition: none !important; animation: none !important; }
+  }
+</style>
+</head>
+<body>
+  <div class="head">
+    <div class="eyebrow">OPSRISEAI · LOGO FINALS · V1.0</div>
+    <h1>Final delivery — concepts 02 Slash + 04 Bracket.</h1>
+    <p class="lede">
+      Each concept ships in three forms: the <b>full lockup</b> (horizontal, for headers and signatures),
+      the <b>isolated mark</b> (square, for app icons and avatars), and <b>three color variants</b>
+      (Ink, Cream, Ember). Specs at the bottom of each section cover clearspace, minimum size, and don'ts.
+    </p>
+  </div>
+
+  <div class="wrap">
+
+    <!-- ========================= 02 — SLASH MARK ========================= -->
+    <section class="section">
+      <div class="section-head">
+        <div>
+          <div class="section-num">02 — SLASH MARK</div>
+          <h2 class="section-name">The system's "//" as the anchor</h2>
+        </div>
+        <div class="section-tag">PURE TYPE · SPACE MONO BOLD</div>
+      </div>
+
+      <!-- Full lockup row -->
+      <div class="row">
+        <div class="tile">
+          <div class="stage dark">
+            <div class="slash-lockup">
+              <span class="slash-stack">
+                <span class="top"><span class="slash">//</span> OPSRISE</span>
+                <span class="bot"><span class="ai"><span class="arrow">↗</span> AI</span></span>
+              </span>
+            </div>
+          </div>
+          <div class="tile-meta"><span class="label">LOCKUP · ON INK</span><span class="hex">#1C1A17</span></div>
+        </div>
+        <div class="tile">
+          <div class="stage cream">
+            <div class="slash-lockup cream" style="color: var(--ink);">
+              <span class="slash-stack">
+                <span class="top"><span class="slash">//</span> OPSRISE</span>
+                <span class="bot"><span class="ai"><span class="arrow">↗</span> AI</span></span>
+              </span>
+            </div>
+          </div>
+          <div class="tile-meta"><span class="label">LOCKUP · ON CREAM</span><span class="hex">#F4F1EB</span></div>
+        </div>
+        <div class="tile">
+          <div class="stage ember">
+            <div class="slash-lockup on-ember" style="color: var(--cream);">
+              <span class="slash-stack">
+                <span class="top"><span class="slash">//</span> OPSRISE</span>
+                <span class="bot"><span class="ai"><span class="arrow">↗</span> AI</span></span>
+              </span>
+            </div>
+          </div>
+          <div class="tile-meta"><span class="label">LOCKUP · ON EMBER</span><span class="hex">#D85A2B</span></div>
+        </div>
+      </div>
+
+      <!-- Isolated mark + favicon tests -->
+      <div class="row two">
+        <div class="tile">
+          <div class="stage dark"><div class="slash-isolated">//↗</div></div>
+          <div class="tile-meta"><span class="label">ISOLATED MARK · "//↗"</span><span class="hex">FOR FAVICONS · AVATARS · APP ICONS</span></div>
+        </div>
+        <div class="tile">
+          <div class="stage dark" style="min-height: 180px;">
+            <div class="favicon-row">
+              <div class="fav s16 dark-bg"><span class="glyph" style="font-size: 8px; color: var(--ember);">//↗</span></div>
+              <div class="fav s24 dark-bg"><span class="glyph" style="font-size: 11px; color: var(--ember);">//↗</span></div>
+              <div class="fav s32 dark-bg"><span class="glyph" style="font-size: 14px; color: var(--ember);">//↗</span></div>
+              <div class="fav s48 dark-bg"><span class="glyph" style="font-size: 20px; color: var(--ember);">//↗</span></div>
+              <div class="fav s64 dark-bg"><span class="glyph" style="font-size: 26px; color: var(--ember);">//↗</span></div>
+              <div class="fav s96 dark-bg"><span class="glyph" style="font-size: 40px; color: var(--ember);">//↗</span></div>
+            </div>
+          </div>
+          <div class="tile-meta"><span class="label">SIZE TEST · 16 → 96 PX</span><span class="hex">SURVIVES TO 16PX</span></div>
+        </div>
+      </div>
+
+      <div class="specs">
+        <div class="spec">
+          <h4>Construction</h4>
+          <ul>
+            <li>Family: <b>Space Mono Bold</b>, 700 wt</li>
+            <li>Tracking: <b>0.06em</b></li>
+            <li>Two-line lockup, baseline offset <b>2.6em</b></li>
+            <li>Ember (#D85A2B) on <b>//</b>, <b>↗</b>, <b>AI</b> only</li>
+            <li>Body of name inherits surface fg</li>
+          </ul>
+        </div>
+        <div class="spec">
+          <h4>Clearspace · Min size · Don'ts</h4>
+          <ul>
+            <li>Clearspace: <b>1× the "O"</b> on every side</li>
+            <li>Min lockup width: <b>120 px</b> (digital), <b>32 mm</b> (print)</li>
+            <li>Min isolated mark: <b>16 px</b></li>
+            <li>Never recolor <b>//↗</b> outside Ember / Ink / Cream</li>
+            <li>Never break the two-line stack — it's the trademark</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ========================= 04 — BRACKET MARK ========================= -->
+    <section class="section">
+      <div class="section-head">
+        <div>
+          <div class="section-num">04 — BRACKET MARK</div>
+          <h2 class="section-name">[ OPS·RISE ].AI — the system in brackets</h2>
+        </div>
+        <div class="section-tag">PURE TYPE · SPACE MONO BOLD</div>
+      </div>
+
+      <!-- Full lockup row -->
+      <div class="row">
+        <div class="tile">
+          <div class="stage dark">
+            <div class="bracket">
+              <span class="br">[</span><span>OPS</span><span class="dot">·</span><span>RISE</span><span class="br">]</span><span class="ai">.AI</span>
+            </div>
+          </div>
+          <div class="tile-meta"><span class="label">LOCKUP · ON INK</span><span class="hex">#1C1A17</span></div>
+        </div>
+        <div class="tile">
+          <div class="stage cream">
+            <div class="bracket cream" style="color: var(--ink);">
+              <span class="br">[</span><span>OPS</span><span class="dot">·</span><span>RISE</span><span class="br">]</span><span class="ai">.AI</span>
+            </div>
+          </div>
+          <div class="tile-meta"><span class="label">LOCKUP · ON CREAM</span><span class="hex">#F4F1EB</span></div>
+        </div>
+        <div class="tile">
+          <div class="stage ember">
+            <div class="bracket on-ember" style="color: var(--cream);">
+              <span class="br">[</span><span>OPS</span><span class="dot">·</span><span>RISE</span><span class="br">]</span><span class="ai">.AI</span>
+            </div>
+          </div>
+          <div class="tile-meta"><span class="label">LOCKUP · ON EMBER</span><span class="hex">#D85A2B</span></div>
+        </div>
+      </div>
+
+      <!-- Isolated mark + favicon tests -->
+      <div class="row two">
+        <div class="tile">
+          <div class="stage dark">
+            <!-- Square isolated: brackets containing OR -->
+            <div style="font-family: 'Space Mono', monospace; font-weight: 700; font-size: 84px; line-height: 1; letter-spacing: 0.04em;">
+              <span style="color: var(--ember);">[</span><span style="color: var(--cream);">OR</span><span style="color: var(--ember);">]</span>
+            </div>
+          </div>
+          <div class="tile-meta"><span class="label">ISOLATED MARK · "[OR]"</span><span class="hex">FOR FAVICONS · AVATARS · APP ICONS</span></div>
+        </div>
+        <div class="tile">
+          <div class="stage ember-bg" style="background: var(--ink);">
+            <div class="favicon-row">
+              <div class="fav s16 dark-bg"><span class="glyph" style="font-size: 9px;"><span style="color: var(--ember);">[</span><span style="color: var(--cream);">OR</span><span style="color: var(--ember);">]</span></span></div>
+              <div class="fav s24 dark-bg"><span class="glyph" style="font-size: 12px;"><span style="color: var(--ember);">[</span><span style="color: var(--cream);">OR</span><span style="color: var(--ember);">]</span></span></div>
+              <div class="fav s32 dark-bg"><span class="glyph" style="font-size: 15px;"><span style="color: var(--ember);">[</span><span style="color: var(--cream);">OR</span><span style="color: var(--ember);">]</span></span></div>
+              <div class="fav s48 ember-bg"><span class="glyph" style="font-size: 22px;"><span style="color: var(--ink);">[</span><span style="color: var(--cream);">OR</span><span style="color: var(--ink);">]</span></span></div>
+              <div class="fav s64 ember-bg"><span class="glyph" style="font-size: 30px;"><span style="color: var(--ink);">[</span><span style="color: var(--cream);">OR</span><span style="color: var(--ink);">]</span></span></div>
+              <div class="fav s96 ember-bg"><span class="glyph" style="font-size: 44px;"><span style="color: var(--ink);">[</span><span style="color: var(--cream);">OR</span><span style="color: var(--ink);">]</span></span></div>
+            </div>
+          </div>
+          <div class="tile-meta"><span class="label">SIZE TEST · 16 → 96 PX</span><span class="hex">SURVIVES TO 16PX</span></div>
+        </div>
+      </div>
+
+      <div class="specs">
+        <div class="spec">
+          <h4>Construction</h4>
+          <ul>
+            <li>Family: <b>Space Mono Bold</b>, 700 wt</li>
+            <li>Tracking: <b>0.06em</b></li>
+            <li>Inside-bracket padding: <b>0.35em</b></li>
+            <li>Ember (#D85A2B) on <b>[</b> <b>]</b> <b>·</b> <b>.AI</b></li>
+            <li>OPS · RISE inherits the surface fg</li>
+          </ul>
+        </div>
+        <div class="spec">
+          <h4>Clearspace · Min size · Don'ts</h4>
+          <ul>
+            <li>Clearspace: <b>1× the "[" height</b> on every side</li>
+            <li>Min lockup width: <b>140 px</b> (digital), <b>36 mm</b> (print)</li>
+            <li>Min isolated mark <b>[OR]</b>: <b>16 px</b></li>
+            <li>Never replace <b>·</b> with a hyphen, slash, or space</li>
+            <li>Brackets must always be <b>square</b> — no rounded variants</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+  </div>
+
+  <div style="max-width:1180px; margin: 40px auto 0; padding-top: 28px; border-top: 1px solid var(--line); font-family: 'Space Mono', monospace; font-size: 11px; letter-spacing: 0.10em; text-transform: uppercase; color: var(--stone); display: flex; justify-content: space-between;">
+    <span>// V1.0 — APPROVED CONCEPTS 02 + 04</span>
+    <span>OPSRISEAI · 2026</span>
+  </div>
+  <script>
+    (async () => {
+      try { if (document.fonts && document.fonts.ready) await document.fonts.ready; } catch (e) {}
+      await new Promise(r => setTimeout(r, 500));
+      window.print();
+    })();
+  </script>
+</body>
+</html>

@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Founder — OpsRise AI</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Space+Mono:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+
+  <style>
+    /* ── TOKENS ── */
+    :root {
+      --ink:         #1C1A17;
+      --ink-2:       #25221E;
+      --ink-3:       #2F2B26;
+      --cream:       #F4F1EB;
+      --ember:       #D85A2B;
+      --ember-hover: #BF4D22;
+      --stone:       #8C8377;
+      --fg-2:        #C9C1B3;
+      --border:      rgba(216,210,200,0.12);
+      --border-mid:  rgba(216,210,200,0.18);
+      --font-serif:  'DM Serif Display', Georgia, serif;
+      --font-mono:   'Space Mono', 'Courier New', monospace;
+      --font-sans:   'DM Sans', system-ui, sans-serif;
+      --ease-out:    cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    body.light {
+      --ink: #FAFAF8; --ink-2: #F0EDE7; --ink-3: #E8E4DE;
+      --cream: #1C1A17; --fg-2: #5A5550; --stone: #7A7370;
+      --border: rgba(28,26,23,0.10); --border-mid: rgba(28,26,23,0.18);
+    }
+    body.light .nav.scrolled { background: rgba(250,250,248,0.92); border-bottom-color: rgba(28,26,23,0.10); }
+    body.light .footer       { border-top-color: rgba(28,26,23,0.10); }
+    body.light .footer-legal { border-top-color: rgba(28,26,23,0.08); }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { background: var(--ink); color: var(--cream); font-family: var(--font-sans); font-weight: 300; font-size: 17px; line-height: 1.65; -webkit-font-smoothing: antialiased; overflow-x: hidden; }
+    ::selection { background: var(--ember); color: var(--cream); }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .reveal { opacity: 0; transform: translateY(20px); transition: opacity 500ms var(--ease-out), transform 500ms var(--ease-out); }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+
+    /* ── LOGO ── */
+    .logo { font-family: var(--font-mono); font-weight: 700; letter-spacing: -0.06em; text-decoration: none; display: inline-flex; align-items: baseline; line-height: 1; }
+    .logo-bracket { color: var(--ember); }
+    .logo-word    { color: var(--cream); }
+    .logo-dot     { color: var(--ember); }
+    .logo-period  { color: var(--ember); }
+    .logo-ai      { color: var(--ember); }
+
+    /* ── NAV ── */
+    .nav { position: fixed; top: 0; left: 0; right: 0; z-index: 50; height: 64px; padding: 0 40px; display: flex; align-items: center; justify-content: space-between; background: transparent; border-bottom: 1px solid transparent; transition: background 200ms var(--ease-out), border-color 200ms var(--ease-out); }
+    .nav.scrolled { background: rgba(28,26,23,0.92); border-bottom-color: var(--border); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); }
+    .nav .logo { font-size: 17px; }
+    .nav-right { display: flex; align-items: center; gap: 12px; }
+    .nav-link { font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.10em; text-transform: uppercase; color: var(--fg-2); text-decoration: none; transition: color 120ms; }
+    .nav-link:hover, .nav-link.active { color: var(--cream); }
+    .nav-cta { display: inline-flex; align-items: center; background: var(--ember); color: var(--cream); font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.10em; text-transform: uppercase; text-decoration: none; padding: 10px 16px; border-radius: 4px; transition: background 120ms, transform 120ms; }
+    .nav-cta:hover { background: var(--ember-hover); transform: scale(1.02); }
+    .theme-toggle { width: 34px; height: 34px; border-radius: 50%; background: transparent; border: 1px solid var(--border-mid); color: var(--stone); display: flex; align-items: center; justify-content: center; cursor: pointer; flex-shrink: 0; transition: border-color 120ms, color 120ms, background 120ms, transform 120ms; }
+    .theme-toggle:hover { border-color: var(--ember); color: var(--ember); background: rgba(216,90,43,0.08); transform: scale(1.08); }
+
+    /* ── PAGE HEADER ── */
+    .page-header { padding: 140px 40px 80px; border-bottom: 1px solid var(--border); text-align: center; animation: fadeUp 0.7s var(--ease-out) both; }
+    .page-eyebrow { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--ember); margin-bottom: 20px; }
+    .page-h1 { font-family: var(--font-serif); font-weight: 400; font-size: clamp(40px, 6vw, 80px); line-height: 1.06; color: var(--cream); }
+
+    /* ── FOUNDER CONTENT ── */
+    .founder-section { padding: 96px 40px; max-width: 1100px; margin: 0 auto; }
+    .founder-grid { display: grid; grid-template-columns: 360px 1fr; gap: 80px; align-items: start; }
+
+    .founder-photo-wrap { border-radius: 10px; overflow: hidden; border: 1px solid var(--border); background: var(--ink-2); position: relative; }
+    .founder-photo { width: 100%; display: block; object-fit: cover; aspect-ratio: 3/4; filter: grayscale(15%); transition: filter 400ms var(--ease-out); }
+    .founder-photo-wrap:hover .founder-photo { filter: grayscale(0%); }
+    .founder-photo-overlay { position: absolute; bottom: 0; left: 0; right: 0; height: 40%; background: linear-gradient(to top, rgba(216,90,43,0.15), transparent); pointer-events: none; }
+    .founder-name-card { margin-top: 14px; padding-top: 14px; border-top: 1px solid var(--border); }
+    .founder-name { font-family: var(--font-serif); font-size: 20px; color: var(--cream); margin-bottom: 4px; }
+    .founder-role { font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--ember); }
+
+    .founder-copy .section-eyebrow { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--ember); margin-bottom: 16px; }
+    .founder-p { font-family: var(--font-sans); font-weight: 300; font-size: 16px; line-height: 1.85; color: var(--fg-2); margin-bottom: 20px; max-width: 540px; }
+    .company-strip { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 10px; padding: 14px 0; margin: 24px 0; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+    .company-item { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.11em; text-transform: uppercase; color: var(--stone); }
+    .company-sep { color: var(--ember); }
+    .stat-callout { display: flex; align-items: baseline; gap: 14px; margin-bottom: 24px; }
+    .stat-number { font-family: var(--font-serif); font-size: clamp(42px, 5vw, 60px); color: var(--ember); line-height: 1; }
+    .stat-label { font-family: var(--font-sans); font-weight: 300; font-size: 14px; color: var(--fg-2); max-width: 180px; line-height: 1.5; }
+
+    .founder-cta { margin-top: 36px; display: flex; flex-wrap: wrap; gap: 12px; align-items: center; }
+    .btn-primary { display: inline-flex; align-items: center; gap: 8px; background: var(--ember); color: var(--cream); font-family: var(--font-mono); font-size: 13px; letter-spacing: 0.10em; text-transform: uppercase; text-decoration: none; padding: 14px 26px; border-radius: 4px; transition: background 120ms, transform 120ms; }
+    .btn-primary:hover { background: var(--ember-hover); transform: scale(1.02); }
+    .btn-linkedin { display: inline-flex; align-items: center; gap: 8px; background: transparent; color: var(--fg-2); font-family: var(--font-mono); font-size: 13px; letter-spacing: 0.10em; text-transform: uppercase; text-decoration: none; padding: 14px 26px; border-radius: 4px; border: 1px solid var(--border-mid); transition: border-color 120ms, color 120ms, transform 120ms; }
+    .btn-linkedin:hover { border-color: #0A66C2; color: #0A66C2; transform: scale(1.02); }
+
+    /* ── FOOTER ── */
+    .footer { padding: 48px 40px 24px; border-top: 1px solid rgba(216,210,200,0.10); }
+    .footer-inner { max-width: 1100px; margin: 0 auto 36px; display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 20px; }
+    .footer-brand { display: flex; flex-direction: column; gap: 10px; }
+    .footer .logo { font-size: 16px; }
+    .footer-tagline { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--stone); }
+    .footer-legal { max-width: 1100px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; padding-top: 18px; border-top: 1px solid rgba(216,210,200,0.08); font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--stone); flex-wrap: wrap; gap: 8px; }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 900px) {
+      .founder-grid { grid-template-columns: 1fr; gap: 40px; }
+      .founder-p { max-width: 100%; }
+    }
+    @media (max-width: 768px) {
+      .nav { padding: 0 20px; }
+      .page-header { padding: 120px 20px 60px; }
+      .founder-section { padding: 64px 20px; }
+      .footer { padding: 40px 20px 20px; }
+      .footer-inner { flex-direction: column; }
+      .footer-legal { flex-direction: column; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ── NAV ── -->
+  <nav class="nav" id="nav">
+    <a href="index.html" class="logo" aria-label="OpsRise AI — home">
+      <span class="logo-bracket">[</span><span class="logo-word">OPS</span><span class="logo-dot">·</span><span class="logo-word">RISE</span><span class="logo-bracket">]</span><span class="logo-period">.</span><span class="logo-ai">AI</span>
+    </a>
+    <div class="nav-right">
+      <a href="index.html#services" class="nav-link">SERVICES</a>
+      <a href="founder.html" class="nav-link active">FOUNDER</a>
+      <a href="insights.html" class="nav-link">INSIGHTS</a>
+      <button class="theme-toggle" id="theme-toggle" aria-label="Toggle theme"></button>
+      <a href="index.html#contact" class="nav-cta">CONTACT →</a>
+    </div>
+  </nav>
+
+  <!-- ── PAGE HEADER ── -->
+  <div class="page-header">
+    <div class="page-eyebrow">// FOUNDER · OPSRISE AI</div>
+    <h1 class="page-h1">Twelve years inside<br />the machine.</h1>
+  </div>
+
+  <!-- ── FOUNDER CONTENT ── -->
+  <div class="founder-section">
+    <div class="founder-grid">
+
+      <div class="reveal">
+        <div class="founder-photo-wrap">
+          <img src="brand_assets/assets/daniel-rojas.jpg" alt="Daniel Rojas — Founder, OpsRise AI" class="founder-photo" />
+          <div class="founder-photo-overlay" aria-hidden="true"></div>
+        </div>
+        <div class="founder-name-card">
+          <div class="founder-name">Daniel Rojas</div>
+          <div class="founder-role">// Founder · OpsRise AI</div>
+        </div>
+      </div>
+
+      <div class="founder-copy reveal" style="transition-delay:120ms">
+        <div class="section-eyebrow">// FOUNDER</div>
+        <p class="founder-p">I studied business administration. Then law. Finished both. And still couldn't tell you exactly what I wanted to do with my life. What I did know: I have a deep intolerance for doing things the hard way when a smarter system exists.</p>
+        <p class="founder-p">Not because I avoid work — because my mind simply won't accept unnecessary effort. If there was a box to move, I was already thinking about how to build the system that moved it automatically.</p>
+        <div class="company-strip">
+          <span class="company-item">Boston Scientific</span><span class="company-sep">·</span>
+          <span class="company-item">Splunk</span><span class="company-sep">·</span>
+          <span class="company-item">Takeda</span><span class="company-sep">·</span>
+          <span class="company-item">Baxter</span>
+        </div>
+        <div class="stat-callout">
+          <span class="stat-number">10,000+</span>
+          <span class="stat-label">users trained through automation implementations</span>
+        </div>
+        <p class="founder-p">I saw first-hand how the world's largest companies don't win because they have more talent. They win because everything runs on systems — documented, measured, connected. A machine.</p>
+        <p class="founder-p">I built OpsRise AI to bring that to operators who deserve it — not with theory, but with real AI systems deployed against real operations. We start by identifying exactly where your business is leaking time and money. Then we build what closes it.</p>
+        <div class="founder-cta">
+          <a href="index.html#contact" class="btn-primary">WORK WITH US →</a>
+          <a href="https://www.linkedin.com/in/danielrojasmora/" target="_blank" rel="noopener noreferrer" class="btn-linkedin">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+            CONNECT ON LINKEDIN
+          </a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ── FOOTER ── -->
+  <footer class="footer">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <a href="index.html" class="logo">
+          <span class="logo-bracket">[</span><span class="logo-word">OPS</span><span class="logo-dot">·</span><span class="logo-word">RISE</span><span class="logo-bracket">]</span><span class="logo-period">.</span><span class="logo-ai">AI</span>
+        </a>
+        <p class="footer-tagline">// AI · CONSULTING · OPERATIONS</p>
+      </div>
+    </div>
+    <div class="footer-legal">
+      <span>OPSRISE AI — V1.0 / 2026</span>
+      <span>© 2026 OPSRISE AI · ALL RIGHTS RESERVED</span>
+    </div>
+  </footer>
+
+  <script>
+    const SUN  = `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>`;
+    const MOON = `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>`;
+    const themeToggle = document.getElementById('theme-toggle');
+    if (localStorage.getItem('opsrise-theme') === 'light') document.body.classList.add('light');
+    function syncIcon() { themeToggle.innerHTML = document.body.classList.contains('light') ? MOON : SUN; }
+    syncIcon();
+    themeToggle.addEventListener('click', () => {
+      document.body.classList.toggle('light');
+      localStorage.setItem('opsrise-theme', document.body.classList.contains('light') ? 'light' : 'dark');
+      syncIcon();
+    });
+
+    const nav = document.getElementById('nav');
+    window.addEventListener('scroll', () => { nav.classList.toggle('scrolled', window.scrollY > 10); }, { passive: true });
+
+    const obs = new IntersectionObserver(entries => entries.forEach(e => {
+      if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); }
+    }), { threshold: 0.12 });
+    document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+    setTimeout(() => document.querySelectorAll('.reveal:not(.visible)').forEach(el => el.classList.add('visible')), 800);
+  </script>
+
+</body>
+</html>

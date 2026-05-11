@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8" /><title>Type scale</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0&family=DM+Sans:wght@300;400&family=Space+Mono:wght@400&family=Silkscreen:wght@700&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="../colors_and_type.css" />
+<style>
+  html,body{margin:0;padding:0;}
+  body{background:var(--dr-ink);color:var(--dr-cream);}
+  .wrap{width:700px;padding:18px 24px;box-sizing:border-box;}
+  .row{display:grid;grid-template-columns:96px 1fr;gap:18px;align-items:baseline;padding:6px 0;border-bottom:1px solid rgba(216,210,200,0.08);}
+  .row:last-child{border-bottom:none;}
+  .meta{font-family:var(--font-mono);font-size:10px;letter-spacing:0.10em;text-transform:uppercase;color:var(--dr-stone);}
+  .serif{font-family:"DM Serif Display";font-weight:400;}
+  .sans{font-family:"DM Sans";font-weight:300;}
+  .display{font-family:"Silkscreen";font-weight:700;text-transform:uppercase;}
+</style>
+</head><body>
+  <div class="wrap">
+    <div class="row"><div class="meta">Display 64</div><div class="display" style="font-size:34px;line-height:1;">COBRA MÁS</div></div>
+    <div class="row"><div class="meta">H1 · 48</div><div class="serif" style="font-size:36px;line-height:1.05;">Sin código.</div></div>
+    <div class="row"><div class="meta">H2 · 36</div><div class="serif" style="font-size:28px;line-height:1.1;">Casos reales</div></div>
+    <div class="row"><div class="meta">H3 · 28</div><div class="serif" style="font-size:22px;line-height:1.15;">Cómo funciona</div></div>
+    <div class="row"><div class="meta">Body · 16</div><div class="sans" style="font-size:14px;line-height:1.55;">Cuerpo principal — DM Sans Light 300, 16px, line-height 1.5.</div></div>
+    <div class="row"><div class="meta">Small · 14</div><div class="sans" style="font-size:13px;color:var(--dr-stone);line-height:1.55;">Texto secundario y descripciones</div></div>
+    <div class="row"><div class="meta">Mono · 12</div><div class="meta" style="font-size:11px;color:var(--dr-cream);">// LABEL · CTA · METADATA</div></div>
+  </div>
+</body></html>

@@ -1,0 +1,676 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Insights — OpsRise AI</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Space+Mono:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+
+  <style>
+    /* ============================================================
+       BRAND TOKENS
+       ============================================================ */
+    :root {
+      --ink:          #1C1A17;
+      --ink-2:        #25221E;
+      --ink-3:        #2F2B26;
+      --ink-4:        #3A352F;
+      --cream:        #F4F1EB;
+      --ember:        #D85A2B;
+      --ember-hover:  #BF4D22;
+      --stone:        #8C8377;
+      --fg-2:         #C9C1B3;
+      --ember-light:  #F8C4B0;
+      --border:       rgba(216,210,200,0.12);
+      --border-mid:   rgba(216,210,200,0.18);
+
+      --font-serif: 'DM Serif Display', Georgia, serif;
+      --font-mono:  'Space Mono', 'Courier New', monospace;
+      --font-sans:  'DM Sans', system-ui, sans-serif;
+      --ease-out:   cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    body.light {
+      --ink:        #FAFAF8;
+      --ink-2:      #F0EDE7;
+      --ink-3:      #E8E4DE;
+      --ink-4:      #DFDBCF;
+      --cream:      #1C1A17;
+      --fg-2:       #5A5550;
+      --stone:      #7A7370;
+      --border:     rgba(28,26,23,0.10);
+      --border-mid: rgba(28,26,23,0.18);
+    }
+    body.light .nav.scrolled {
+      background: rgba(250,250,248,0.92);
+      border-bottom-color: rgba(28,26,23,0.10);
+    }
+    body.light .insights-hero-dots {
+      background-image: radial-gradient(rgba(28,26,23,0.04) 1px, transparent 1px);
+    }
+    body.light .article-card { border-color: rgba(28,26,23,0.10); }
+    body.light .article-card:hover { background: rgba(28,26,23,0.04); border-color: rgba(28,26,23,0.20); }
+    body.light .footer { border-top-color: rgba(28,26,23,0.10); }
+    body.light .footer-legal { border-top-color: rgba(28,26,23,0.08); }
+    body.light .empty-state { border-color: rgba(28,26,23,0.10); }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--ink);
+      color: var(--cream);
+      font-family: var(--font-sans);
+      font-weight: 300;
+      font-size: 17px;
+      line-height: 1.65;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+    ::selection { background: var(--ember); color: var(--cream); }
+
+    /* ============================================================
+       ANIMATIONS
+       ============================================================ */
+    .reveal {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 400ms var(--ease-out), transform 400ms var(--ease-out);
+    }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+
+    /* ============================================================
+       LOGO
+       ============================================================ */
+    .logo {
+      font-family: var(--font-mono);
+      font-weight: 700;
+      letter-spacing: -0.06em;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: baseline;
+      line-height: 1;
+    }
+    .logo-bracket { color: var(--ember); }
+    .logo-word    { color: var(--cream); }
+    .logo-dot     { color: var(--ember); }
+    .logo-period  { color: var(--ember); }
+    .logo-ai      { color: var(--ember); }
+
+    /* ============================================================
+       NAVIGATION
+       ============================================================ */
+    .nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 50;
+      height: 64px;
+      padding: 0 40px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: transparent;
+      border-bottom: 1px solid transparent;
+      transition: background 200ms var(--ease-out), border-color 200ms var(--ease-out);
+    }
+    .nav.scrolled {
+      background: rgba(28,26,23,0.90);
+      border-bottom-color: var(--border);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+    }
+    .nav .logo { font-size: 17px; }
+    .nav-right { display: flex; align-items: center; gap: 12px; }
+
+    .nav-link {
+      font-family: var(--font-mono);
+      font-size: 12px;
+      letter-spacing: 0.10em;
+      text-transform: uppercase;
+      color: var(--fg-2);
+      text-decoration: none;
+      transition: color 120ms var(--ease-out);
+    }
+    .nav-link:hover { color: var(--cream); }
+    .nav-link[aria-current="page"] { color: var(--cream); }
+
+    .nav-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: var(--ember);
+      color: var(--cream);
+      font-family: var(--font-mono);
+      font-size: 12px;
+      letter-spacing: 0.10em;
+      text-transform: uppercase;
+      text-decoration: none;
+      padding: 10px 16px;
+      border-radius: 4px;
+      transition: background 120ms var(--ease-out), transform 120ms var(--ease-out);
+    }
+    .nav-cta:hover { background: var(--ember-hover); transform: scale(1.02); }
+    .nav-cta:active { transform: scale(0.98); }
+
+    .theme-toggle {
+      width: 34px; height: 34px; border-radius: 50%;
+      background: transparent; border: 1px solid var(--border-mid);
+      color: var(--stone); display: flex; align-items: center; justify-content: center;
+      cursor: pointer; flex-shrink: 0;
+      transition: border-color 120ms var(--ease-out), color 120ms var(--ease-out),
+                  background 120ms var(--ease-out), transform 120ms var(--ease-out);
+    }
+    .theme-toggle:hover {
+      border-color: var(--ember); color: var(--ember);
+      background: rgba(216,90,43,0.08); transform: scale(1.08);
+    }
+    .theme-toggle:active { transform: scale(0.94); }
+
+    /* ============================================================
+       INSIGHTS HERO
+       ============================================================ */
+    .insights-hero {
+      padding: 140px 40px 72px;
+      position: relative;
+    }
+    .insights-hero-dots {
+      position: absolute; inset: 0; pointer-events: none;
+      background-image: radial-gradient(rgba(216,90,43,0.06) 1px, transparent 1px);
+      background-size: 24px 24px;
+    }
+    .insights-hero-inner {
+      position: relative;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .eyebrow {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--ember);
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+    }
+    .eyebrow-prefix { opacity: 0.6; margin-right: 5px; }
+
+    .insights-h1 {
+      font-family: var(--font-serif);
+      font-weight: 400;
+      font-size: clamp(36px, 5vw, 64px);
+      line-height: 1.1;
+      color: var(--cream);
+      margin-bottom: 20px;
+      max-width: 700px;
+    }
+
+    .insights-sub {
+      font-family: var(--font-sans);
+      font-weight: 300;
+      font-size: 17px;
+      line-height: 1.7;
+      color: var(--fg-2);
+      max-width: 520px;
+      margin-bottom: 0;
+    }
+
+    /* ============================================================
+       ARTICLE GRID
+       ============================================================ */
+    .articles-section {
+      padding: 56px 40px 96px;
+    }
+    .articles-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .articles-meta {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding-bottom: 24px;
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 40px;
+    }
+    .articles-count {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--stone);
+    }
+
+    .articles-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+
+    /* ============================================================
+       ARTICLE CARD
+       ============================================================ */
+    .article-card {
+      display: flex;
+      flex-direction: column;
+      background: var(--ink-2);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      overflow: hidden;
+      text-decoration: none;
+      color: inherit;
+      transition: background 200ms var(--ease-out), border-color 200ms var(--ease-out),
+                  transform 200ms var(--ease-out);
+    }
+    .article-card:hover {
+      background: var(--ink-3);
+      border-color: rgba(216,210,200,0.22);
+      transform: translateY(-3px);
+    }
+    .article-card:active { transform: translateY(0); }
+
+    .article-thumb {
+      width: 100%;
+      aspect-ratio: 16/9;
+      background: var(--ink-3);
+      overflow: hidden;
+      position: relative;
+    }
+    .article-thumb img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      display: block;
+      filter: grayscale(20%);
+      transition: transform 400ms var(--ease-out), filter 400ms var(--ease-out);
+    }
+    .article-card:hover .article-thumb img {
+      transform: scale(1.03);
+      filter: grayscale(0%);
+    }
+    .article-thumb-placeholder {
+      width: 100%; height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--ink-3);
+    }
+    .article-thumb-placeholder span {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--stone);
+      opacity: 0.5;
+    }
+
+    .article-body {
+      padding: 22px 22px 24px;
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+    }
+    .article-meta-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 12px;
+    }
+    .article-tag {
+      display: inline-block;
+      padding: 3px 8px;
+      background: rgba(248,196,176,0.12);
+      color: var(--ember-light);
+      font-family: var(--font-mono);
+      font-size: 9px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      border-radius: 3px;
+    }
+    .article-date {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      letter-spacing: 0.10em;
+      color: var(--stone);
+    }
+
+    .article-title {
+      font-family: var(--font-serif);
+      font-weight: 400;
+      font-size: 20px;
+      line-height: 1.25;
+      color: var(--cream);
+      margin-bottom: 10px;
+    }
+    .article-excerpt {
+      font-family: var(--font-sans);
+      font-weight: 300;
+      font-size: 14px;
+      line-height: 1.7;
+      color: var(--fg-2);
+      flex: 1;
+      margin-bottom: 18px;
+    }
+    .article-read-more {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      letter-spacing: 0.10em;
+      text-transform: uppercase;
+      color: var(--ember);
+      transition: color 120ms var(--ease-out);
+    }
+    .article-card:hover .article-read-more { color: var(--ember-hover); }
+
+    /* ============================================================
+       EMPTY STATE
+       ============================================================ */
+    .empty-state {
+      grid-column: 1 / -1;
+      padding: 72px 40px;
+      border: 1px dashed var(--border);
+      border-radius: 10px;
+      text-align: center;
+    }
+    .empty-icon {
+      font-family: var(--font-mono);
+      font-size: 28px;
+      color: var(--ember);
+      margin-bottom: 16px;
+      opacity: 0.6;
+    }
+    .empty-heading {
+      font-family: var(--font-serif);
+      font-weight: 400;
+      font-size: 24px;
+      color: var(--cream);
+      margin-bottom: 10px;
+    }
+    .empty-sub {
+      font-family: var(--font-sans);
+      font-weight: 300;
+      font-size: 14px;
+      color: var(--fg-2);
+      max-width: 380px;
+      margin: 0 auto 28px;
+      line-height: 1.7;
+    }
+
+    /* ============================================================
+       SUBSCRIBE STRIP
+       ============================================================ */
+    .subscribe-strip {
+      border-top: 1px solid var(--border);
+      padding: 72px 40px;
+      text-align: center;
+    }
+    body.light .subscribe-strip { border-top-color: rgba(28,26,23,0.10); }
+    .subscribe-inner { max-width: 480px; margin: 0 auto; }
+    .subscribe-eyebrow { justify-content: center; margin-bottom: 16px; }
+    .subscribe-heading {
+      font-family: var(--font-serif);
+      font-weight: 400;
+      font-size: clamp(22px, 2.8vw, 34px);
+      line-height: 1.2;
+      color: var(--cream);
+      margin-bottom: 12px;
+    }
+    .subscribe-sub {
+      font-family: var(--font-sans);
+      font-weight: 300;
+      font-size: 15px;
+      line-height: 1.7;
+      color: var(--fg-2);
+      margin-bottom: 28px;
+    }
+    .subscribe-form {
+      display: flex;
+      gap: 10px;
+      max-width: 400px;
+      margin: 0 auto;
+    }
+    .subscribe-input {
+      flex: 1;
+      background: var(--ink-2);
+      border: 1px solid var(--border-mid);
+      border-radius: 4px;
+      padding: 12px 16px;
+      font-family: var(--font-sans);
+      font-weight: 300;
+      font-size: 14px;
+      color: var(--cream);
+      outline: none;
+      transition: border-color 120ms var(--ease-out);
+    }
+    .subscribe-input::placeholder { color: var(--stone); }
+    .subscribe-input:focus { border-color: var(--ember); }
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--ember);
+      color: var(--cream);
+      font-family: var(--font-mono);
+      font-size: 12px;
+      letter-spacing: 0.10em;
+      text-transform: uppercase;
+      text-decoration: none;
+      padding: 12px 20px;
+      border-radius: 4px;
+      border: none;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: background 120ms var(--ease-out), transform 120ms var(--ease-out), box-shadow 200ms var(--ease-out);
+    }
+    .btn-primary:hover {
+      background: var(--ember-hover);
+      transform: scale(1.02);
+      box-shadow: 0 0 0 1px rgba(216,90,43,0.50), 0 8px 28px rgba(216,90,43,0.30);
+    }
+    .btn-primary:active { transform: scale(0.98); }
+
+    /* ============================================================
+       FOOTER
+       ============================================================ */
+    .footer { padding: 40px 40px 24px; border-top: 1px solid rgba(216,210,200,0.10); }
+    .footer-inner {
+      max-width: 1100px; margin: 0 auto 28px;
+      display: flex; justify-content: space-between; align-items: flex-start;
+      flex-wrap: wrap; gap: 20px;
+    }
+    .footer-brand { display: flex; flex-direction: column; gap: 10px; }
+    .footer .logo { font-size: 16px; }
+    .footer-tagline {
+      font-family: var(--font-mono); font-size: 11px;
+      letter-spacing: 0.14em; text-transform: uppercase; color: var(--stone);
+    }
+    .footer-legal {
+      max-width: 1100px; margin: 0 auto;
+      display: flex; justify-content: space-between; align-items: center;
+      padding-top: 18px; border-top: 1px solid rgba(216,210,200,0.08);
+      font-family: var(--font-mono); font-size: 10px;
+      letter-spacing: 0.12em; text-transform: uppercase; color: var(--stone);
+      flex-wrap: wrap; gap: 8px;
+    }
+
+    /* ============================================================
+       RESPONSIVE
+       ============================================================ */
+    @media (max-width: 900px) {
+      .articles-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 768px) {
+      .nav { padding: 0 20px; }
+      .insights-hero { padding: 120px 20px 56px; }
+      .articles-section { padding: 40px 20px 72px; }
+      .articles-grid { grid-template-columns: 1fr; }
+      .subscribe-strip { padding: 56px 20px; }
+      .subscribe-form { flex-direction: column; }
+      .footer { padding: 36px 20px 20px; }
+      .footer-inner { flex-direction: column; }
+      .footer-legal { flex-direction: column; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav class="nav" id="nav" role="navigation" aria-label="Main">
+    <a href="index.html" class="logo" aria-label="OpsRise AI — home">
+      <span class="logo-bracket">[</span><span class="logo-word">OPS</span><span class="logo-dot">·</span><span class="logo-word">RISE</span><span class="logo-bracket">]</span><span class="logo-period">.</span><span class="logo-ai">AI</span>
+    </a>
+    <div class="nav-right">
+      <a href="index.html#services" class="nav-link">SERVICES</a>
+      <a href="founder.html" class="nav-link">FOUNDER</a>
+      <a href="insights.html" class="nav-link" aria-current="page">INSIGHTS</a>
+      <button class="theme-toggle" id="theme-toggle" aria-label="Toggle light/dark mode"></button>
+      <a href="index.html#contact" class="nav-cta">CONTACT →</a>
+    </div>
+  </nav>
+
+  <!-- INSIGHTS HERO -->
+  <section class="insights-hero" aria-label="Insights">
+    <div class="insights-hero-dots" aria-hidden="true"></div>
+    <div class="insights-hero-inner">
+
+      <div class="eyebrow reveal">
+        <span class="eyebrow-prefix">//</span>
+        INSIGHTS
+      </div>
+
+      <h1 class="insights-h1 reveal" style="transition-delay:80ms">
+        Thinking out loud<br />on AI and operations.
+      </h1>
+
+      <p class="insights-sub reveal" style="transition-delay:160ms">
+        Patterns I notice. Systems that work. Mistakes worth avoiding.
+        No theory — just what's real from working inside live operations.
+      </p>
+
+    </div>
+  </section>
+
+  <!-- ARTICLES -->
+  <section class="articles-section" aria-label="Articles">
+    <div class="articles-inner">
+
+      <div class="articles-meta reveal">
+        <span class="articles-count">0 articles published</span>
+      </div>
+
+      <div class="articles-grid">
+        <!-- Empty state — remove this block when articles are added -->
+        <div class="empty-state reveal">
+          <div class="empty-icon">// _</div>
+          <h2 class="empty-heading">First article coming soon.</h2>
+          <p class="empty-sub">
+            Subscribe below to get notified when new pieces drop —
+            practical takes on AI, automation, and the operations that hold businesses back.
+          </p>
+        </div>
+
+        <!--
+          ARTICLE CARD TEMPLATE — copy and paste below to add new articles.
+          Replace placeholder values with real content.
+
+          <a href="articles/your-article-slug.html" class="article-card reveal">
+            <div class="article-thumb">
+              <img src="brand_assets/assets/article-cover.jpg" alt="Article title" />
+            </div>
+            <div class="article-body">
+              <div class="article-meta-row">
+                <span class="article-tag">OPERATIONS</span>
+                <span class="article-date">May 2026</span>
+              </div>
+              <h2 class="article-title">Your article title goes here</h2>
+              <p class="article-excerpt">
+                A one or two sentence summary of what the article covers.
+                Keep it specific — no generic "learn more about AI" copy.
+              </p>
+              <span class="article-read-more">READ →</span>
+            </div>
+          </a>
+        -->
+      </div>
+
+    </div>
+  </section>
+
+  <!-- SUBSCRIBE STRIP -->
+  <div class="subscribe-strip">
+    <div class="subscribe-inner reveal">
+      <div class="eyebrow subscribe-eyebrow">
+        <span class="eyebrow-prefix">//</span>
+        STAY CURRENT
+      </div>
+      <h2 class="subscribe-heading">Get new articles in your inbox.</h2>
+      <p class="subscribe-sub">
+        No newsletters. Just a note when something new and worth reading goes up.
+      </p>
+      <form class="subscribe-form" onsubmit="return false;">
+        <input
+          type="email"
+          class="subscribe-input"
+          placeholder="your@email.com"
+          aria-label="Email address"
+        />
+        <button type="submit" class="btn-primary">SUBSCRIBE →</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer class="footer" role="contentinfo">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <a href="index.html" class="logo">
+          <span class="logo-bracket">[</span><span class="logo-word">OPS</span><span class="logo-dot">·</span><span class="logo-word">RISE</span><span class="logo-bracket">]</span><span class="logo-period">.</span><span class="logo-ai">AI</span>
+        </a>
+        <p class="footer-tagline">// AI · CONSULTING · OPERATIONS</p>
+      </div>
+    </div>
+    <div class="footer-legal">
+      <span>OPSRISE AI — V1.0 / 2026</span>
+      <span>© 2026 OPSRISE AI · ALL RIGHTS RESERVED</span>
+    </div>
+  </footer>
+
+  <script>
+    // Theme toggle
+    const SUN  = `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>`;
+    const MOON = `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>`;
+
+    const themeToggle = document.getElementById('theme-toggle');
+    if (localStorage.getItem('opsrise-theme') === 'light') document.body.classList.add('light');
+    function syncIcon() {
+      themeToggle.innerHTML = document.body.classList.contains('light') ? MOON : SUN;
+    }
+    syncIcon();
+    themeToggle.addEventListener('click', () => {
+      document.body.classList.toggle('light');
+      localStorage.setItem('opsrise-theme', document.body.classList.contains('light') ? 'light' : 'dark');
+      syncIcon();
+    });
+
+    // Nav scroll
+    const nav = document.getElementById('nav');
+    window.addEventListener('scroll', () => {
+      nav.classList.toggle('scrolled', window.scrollY > 10);
+    }, { passive: true });
+
+    // Scroll reveal
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) { entry.target.classList.add('visible'); observer.unobserve(entry.target); }
+      });
+    }, { threshold: 0.12 });
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+    setTimeout(() => {
+      document.querySelectorAll('.reveal:not(.visible)').forEach(el => el.classList.add('visible'));
+    }, 800);
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>OpsRise AI — AI Operations & Voice Agents</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Space+Mono:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+
+  <style>
+    /* ── TOKENS ── */
+    :root {
+      --ink:         #1C1A17;
+      --ink-2:       #25221E;
+      --ink-3:       #2F2B26;
+      --cream:       #F4F1EB;
+      --ember:       #D85A2B;
+      --ember-hover: #BF4D22;
+      --stone:       #8C8377;
+      --fg-2:        #C9C1B3;
+      --ember-light: #F8C4B0;
+      --border:      rgba(216,210,200,0.12);
+      --border-mid:  rgba(216,210,200,0.18);
+      --font-serif:  'DM Serif Display', Georgia, serif;
+      --font-mono:   'Space Mono', 'Courier New', monospace;
+      --font-sans:   'DM Sans', system-ui, sans-serif;
+      --ease-out:    cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    body.light {
+      --ink: #FAFAF8; --ink-2: #F0EDE7; --ink-3: #E8E4DE;
+      --cream: #1C1A17; --fg-2: #5A5550; --stone: #7A7370;
+      --border: rgba(28,26,23,0.10); --border-mid: rgba(28,26,23,0.18);
+    }
+    body.light .nav.scrolled    { background: rgba(250,250,248,0.92); border-bottom-color: rgba(28,26,23,0.10); }
+    body.light .svc-card        { background: var(--ink-2); }
+    body.light .footer          { border-top-color: rgba(28,26,23,0.10); }
+    body.light .footer-legal    { border-top-color: rgba(28,26,23,0.08); }
+    /* Hero always sits on the dark starfield — keep text light in both modes */
+    body.light .hero-title      { color: #F4F1EB; }
+    body.light .hero-label      { color: #C9C1B3; }
+    body.light .hero .eyebrow   { color: var(--ember); }
+    /* Nav over hero (transparent) — keep logo & links light since starfield is always dark */
+    body.light .nav:not(.scrolled) .logo-word { color: #F4F1EB; }
+    body.light .nav:not(.scrolled) .nav-link  { color: #C9C1B3; }
+    body.light .nav:not(.scrolled) .nav-link:hover { color: #F4F1EB; }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { background: var(--ink); color: var(--cream); font-family: var(--font-sans); font-weight: 300; font-size: 17px; line-height: 1.65; -webkit-font-smoothing: antialiased; overflow-x: hidden; }
+    ::selection { background: var(--ember); color: var(--cream); }
+
+    /* ── ANIMATIONS ── */
+    @keyframes wordReveal {
+      from { opacity: 0; filter: blur(12px); transform: translateY(24px); }
+      to   { opacity: 1; filter: blur(0);    transform: translateY(0); }
+    }
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(16px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes ctaPulse {
+      0%, 100% { box-shadow: 0 0 0 1px rgba(216,90,43,0.35), 0 4px 16px rgba(216,90,43,0.15); }
+      50%       { box-shadow: 0 0 0 1px rgba(216,90,43,0.55), 0 8px 28px rgba(216,90,43,0.32); }
+    }
+    @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
+
+    .reveal { opacity: 0; transform: translateY(20px); transition: opacity 400ms var(--ease-out), transform 400ms var(--ease-out); }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+
+    /* ── LOGO ── */
+    .logo { font-family: var(--font-mono); font-weight: 700; letter-spacing: -0.06em; text-decoration: none; display: inline-flex; align-items: baseline; line-height: 1; }
+    .logo-bracket { color: var(--ember); }
+    .logo-word    { color: var(--cream); }
+    .logo-dot     { color: var(--ember); }
+    .logo-period  { color: var(--ember); }
+    .logo-ai      { color: var(--ember); }
+
+    /* ── NAV ── */
+    .nav { position: fixed; top: 0; left: 0; right: 0; z-index: 50; height: 64px; padding: 0 40px; display: flex; align-items: center; justify-content: space-between; background: transparent; border-bottom: 1px solid transparent; transition: background 200ms var(--ease-out), border-color 200ms var(--ease-out); }
+    .nav.scrolled { background: rgba(28,26,23,0.92); border-bottom-color: var(--border); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); }
+    .nav .logo { font-size: 17px; }
+    .nav-right { display: flex; align-items: center; gap: 12px; }
+    .nav-link { font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.10em; text-transform: uppercase; color: var(--fg-2); text-decoration: none; transition: color 120ms var(--ease-out); }
+    .nav-link:hover { color: var(--cream); }
+    .nav-cta { display: inline-flex; align-items: center; background: var(--ember); color: var(--cream); font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.10em; text-transform: uppercase; text-decoration: none; padding: 10px 16px; border-radius: 4px; transition: background 120ms var(--ease-out), transform 120ms var(--ease-out); }
+    .nav-cta:hover { background: var(--ember-hover); transform: scale(1.02); }
+    .theme-toggle { width: 34px; height: 34px; border-radius: 50%; background: transparent; border: 1px solid var(--border-mid); color: var(--stone); display: flex; align-items: center; justify-content: center; cursor: pointer; flex-shrink: 0; transition: border-color 120ms, color 120ms, background 120ms, transform 120ms; }
+    .theme-toggle:hover { border-color: var(--ember); color: var(--ember); background: rgba(216,90,43,0.08); transform: scale(1.08); }
+
+    /* ── HERO (Myna Hero style) ── */
+    .hero { position: relative; min-height: 100vh; display: flex; align-items: center; justify-content: center; overflow: hidden; border-bottom: 1px solid var(--border); }
+    #hero-starfield { position: absolute; inset: 0; width: 100%; height: 100%; z-index: 0; pointer-events: none; display: block; }
+    .hero-center { position: relative; z-index: 1; max-width: 960px; width: 100%; margin: 0 auto; padding: 140px 40px 100px; text-align: center; }
+
+    .eyebrow { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--ember); margin-bottom: 28px; display: flex; align-items: center; gap: 5px; }
+    .eyebrow-prefix { opacity: 0.6; }
+    .eyebrow-cursor { display: inline-block; margin-left: 4px; animation: blink 1s step-end infinite; }
+
+    .hero .eyebrow { justify-content: center; animation: fadeUp 0.5s var(--ease-out) both; }
+    .hero-title { font-family: var(--font-serif); font-weight: 400; font-size: clamp(44px, 7vw, 96px); line-height: 1.06; color: var(--cream); margin-bottom: 28px; }
+    .hero-word { display: inline-block; margin: 0 0.1em; animation: wordReveal 0.6s var(--ease-out) both; animation-delay: calc(var(--i) * 150ms); }
+    .hero-labels { display: flex; flex-wrap: wrap; justify-content: center; gap: 32px; margin: 48px auto; animation: fadeUp 0.6s var(--ease-out) both; animation-delay: 1.2s; }
+    .hero-label { display: flex; align-items: center; gap: 10px; font-family: var(--font-mono); font-size: 13px; letter-spacing: 0.08em; color: var(--fg-2); }
+    .hero-label-icon { color: var(--ember); flex-shrink: 0; }
+    .hero-cta { animation: fadeUp 0.6s var(--ease-out) both; animation-delay: 1.6s; }
+
+    /* ── BUTTONS ── */
+    .btn-primary { display: inline-flex; align-items: center; gap: 8px; background: var(--ember); color: var(--cream); font-family: var(--font-mono); font-size: 13px; letter-spacing: 0.10em; text-transform: uppercase; text-decoration: none; padding: 14px 26px; border-radius: 4px; border: none; cursor: pointer; animation: ctaPulse 3s ease-in-out infinite; transition: background 120ms var(--ease-out), transform 120ms var(--ease-out), box-shadow 200ms var(--ease-out); }
+    .btn-primary:hover { background: var(--ember-hover); transform: scale(1.02); animation: none; box-shadow: 0 0 0 1px rgba(216,90,43,0.50), 0 8px 28px rgba(216,90,43,0.35); }
+    .btn-primary:active { transform: scale(0.98); }
+
+    /* ── SECTION SHELL ── */
+    .section { padding: 96px 40px; border-bottom: 1px solid var(--border); }
+    .section-inner { max-width: 1100px; margin: 0 auto; }
+    .section-eyebrow { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--ember); margin-bottom: 16px; display: flex; align-items: center; gap: 5px; }
+    .section-h2 { font-family: var(--font-serif); font-weight: 400; font-size: clamp(30px, 3.5vw, 48px); color: var(--cream); line-height: 1.12; margin-bottom: 56px; }
+
+    /* ── SERVICES (Myna bordered cards) ── */
+    .services-header { max-width: 1100px; margin: 0 auto 0; text-align: center; }
+    .services-header .section-eyebrow { justify-content: center; }
+    .services-header .section-h2 { margin-bottom: 48px; }
+    .services-grid { display: grid; grid-template-columns: 1fr 1fr; max-width: 1100px; margin: 0 auto; }
+    .svc-card { padding: 52px 44px; border: 1px solid var(--border); background: var(--ink); display: flex; flex-direction: column; gap: 16px; transition: border-color 200ms var(--ease-out); }
+    .svc-card + .svc-card { border-left: none; }
+    .svc-card:hover { border-color: rgba(216,90,43,0.32); }
+    .svc-num { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.14em; color: var(--ember); }
+    .svc-title { font-family: var(--font-serif); font-weight: 400; font-size: clamp(22px, 2.5vw, 32px); color: var(--cream); line-height: 1.2; }
+    .svc-desc { font-family: var(--font-sans); font-weight: 300; font-size: 15px; line-height: 1.75; color: var(--fg-2); flex: 1; }
+    .svc-link { font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.10em; text-transform: uppercase; color: var(--ember); text-decoration: none; display: inline-flex; align-items: center; gap: 6px; margin-top: 8px; transition: letter-spacing 120ms var(--ease-out); }
+    .svc-card:hover .svc-link { letter-spacing: 0.14em; }
+
+    /* ── CONTACT ── */
+    .contact-inner { max-width: 680px; margin: 0 auto; text-align: center; }
+    .contact-h2 { font-family: var(--font-serif); font-weight: 400; font-size: clamp(32px, 4vw, 52px); line-height: 1.1; color: var(--cream); margin-bottom: 14px; }
+    .contact-sub { font-family: var(--font-sans); font-weight: 300; font-size: 16px; line-height: 1.7; color: var(--fg-2); margin: 0 auto 44px; max-width: 480px; }
+    .contact-form { display: flex; flex-direction: column; gap: 14px; text-align: left; margin-bottom: 24px; }
+    .form-row-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    .form-field { display: flex; flex-direction: column; gap: 7px; }
+    .form-label { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.10em; text-transform: uppercase; color: var(--stone); }
+    .form-input, .form-textarea, .form-select { background: var(--ink-2); border: 1px solid var(--border-mid); border-radius: 4px; padding: 13px 14px; color: var(--cream); font-family: var(--font-sans); font-weight: 300; font-size: 15px; outline: none; width: 100%; transition: border-color 120ms var(--ease-out), box-shadow 120ms var(--ease-out); }
+    .form-input::placeholder, .form-textarea::placeholder { color: var(--stone); opacity: 0.55; }
+    .form-input:focus, .form-textarea:focus, .form-select:focus { border-color: var(--ember); box-shadow: 0 0 0 2px var(--ink), 0 0 0 4px var(--ember); }
+    .form-textarea { resize: vertical; min-height: 120px; line-height: 1.65; }
+    .form-select { appearance: none; -webkit-appearance: none; cursor: pointer; background-image: url("data:image/svg+xml,%3Csvg width='12' height='8' viewBox='0 0 12 8' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%238C8377' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 14px center; padding-right: 36px; }
+    .form-select option { background: var(--ink-2); color: var(--cream); }
+    .form-notice { background: rgba(216,90,43,0.08); border: 1px solid rgba(216,90,43,0.22); border-radius: 6px; padding: 14px 16px; font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.06em; color: var(--fg-2); line-height: 1.6; margin-bottom: 28px; text-align: left; }
+    .form-notice strong { color: var(--ember); }
+    .checkbox-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+    .checkbox-item { display: flex; align-items: center; gap: 10px; background: var(--ink-2); border: 1px solid var(--border); border-radius: 4px; padding: 12px 14px; cursor: pointer; transition: border-color 120ms, background 120ms; user-select: none; }
+    .checkbox-item:hover { border-color: rgba(216,90,43,0.35); background: var(--ink-3); }
+    .checkbox-item input[type="checkbox"] { width: 16px; height: 16px; flex-shrink: 0; accent-color: var(--ember); cursor: pointer; }
+    .checkbox-item span { font-family: var(--font-sans); font-weight: 300; font-size: 13px; color: var(--fg-2); line-height: 1.4; }
+    .checkbox-item:has(input:checked) { border-color: rgba(216,90,43,0.45); background: rgba(216,90,43,0.06); }
+    .checkbox-item:has(input:checked) span { color: var(--cream); }
+    .form-submit { width: 100%; padding: 15px 22px; background: var(--ember); color: var(--cream); border: none; border-radius: 4px; font-family: var(--font-mono); font-size: 13px; letter-spacing: 0.10em; text-transform: uppercase; cursor: pointer; margin-top: 4px; transition: background 120ms, transform 120ms, box-shadow 200ms; }
+    .form-submit:hover { background: var(--ember-hover); transform: scale(1.01); box-shadow: 0 0 0 1px rgba(216,90,43,0.35), 0 6px 20px rgba(216,90,43,0.25); }
+    .form-submit:active { transform: scale(0.98); }
+    .form-submit:disabled { background: #6BA368; cursor: default; transform: none; box-shadow: none; }
+    .contact-direct { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.10em; color: var(--stone); margin-top: 20px; }
+    .contact-direct a { color: var(--ember); text-decoration: none; border-bottom: 1px solid rgba(216,90,43,0.3); transition: border-color 120ms; }
+    .contact-direct a:hover { border-bottom-color: var(--ember); }
+
+    /* ── FOOTER ── */
+    .footer { padding: 48px 40px 24px; border-top: 1px solid rgba(216,210,200,0.10); }
+    .footer-inner { max-width: 1100px; margin: 0 auto 36px; display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 20px; }
+    .footer-brand { display: flex; flex-direction: column; gap: 10px; }
+    .footer .logo { font-size: 16px; }
+    .footer-tagline { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--stone); }
+    .footer-legal { max-width: 1100px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; padding-top: 18px; border-top: 1px solid rgba(216,210,200,0.08); font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--stone); flex-wrap: wrap; gap: 8px; }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 900px) {
+      .founder-grid { grid-template-columns: 1fr; gap: 40px; }
+      .founder-p { max-width: 100%; }
+    }
+    @media (max-width: 768px) {
+      .nav { padding: 0 20px; }
+      .hero-center { padding: 120px 20px 80px; }
+      .hero-labels { gap: 20px; }
+      .section { padding: 72px 20px; }
+      .services-grid { grid-template-columns: 1fr; }
+      .svc-card + .svc-card { border-left: 1px solid var(--border); border-top: none; }
+      .form-row-2 { grid-template-columns: 1fr; }
+      .checkbox-grid { grid-template-columns: 1fr; }
+      .footer { padding: 40px 20px 20px; }
+      .footer-inner { flex-direction: column; }
+      .footer-legal { flex-direction: column; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ── NAV ── -->
+  <nav class="nav" id="nav">
+    <a href="#top" class="logo" aria-label="OpsRise AI — home">
+      <span class="logo-bracket">[</span><span class="logo-word">OPS</span><span class="logo-dot">·</span><span class="logo-word">RISE</span><span class="logo-bracket">]</span><span class="logo-period">.</span><span class="logo-ai">AI</span>
+    </a>
+    <div class="nav-right">
+      <a href="#services" class="nav-link">SERVICES</a>
+      <a href="founder.html" class="nav-link">FOUNDER</a>
+      <a href="insights.html" class="nav-link">INSIGHTS</a>
+      <button class="theme-toggle" id="theme-toggle" aria-label="Toggle theme"></button>
+      <a href="#contact" class="nav-cta">CONTACT →</a>
+    </div>
+  </nav>
+
+  <!-- ── HERO ── -->
+  <section class="hero" id="top">
+    <canvas id="hero-starfield" aria-hidden="true"></canvas>
+    <div class="hero-center">
+
+      <div class="eyebrow">
+        <span class="eyebrow-prefix">//</span>
+        AI · VOICE AGENTS · OPERATIONS
+        <span class="eyebrow-cursor" aria-hidden="true">▍</span>
+      </div>
+
+      <h1 class="hero-title">
+        <span class="hero-word" style="--i:0">We</span>
+        <span class="hero-word" style="--i:1">build</span>
+        <span class="hero-word" style="--i:2">AI</span>
+        <span class="hero-word" style="--i:3">that</span>
+        <span class="hero-word" style="--i:4">runs</span>
+        <span class="hero-word" style="--i:5">your</span>
+        <span class="hero-word" style="--i:6">operation.</span>
+      </h1>
+
+      <div class="hero-labels">
+        <div class="hero-label">
+          <svg class="hero-label-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.44 2 2 0 0 1 3.59 1h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.56a16 16 0 0 0 6 6l.94-.94a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 21.72 16"/></svg>
+          <span>AI Voice Agents</span>
+        </div>
+        <div class="hero-label">
+          <svg class="hero-label-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+          <span>AI Operations System</span>
+        </div>
+      </div>
+
+      <div class="hero-cta">
+        <a href="#contact" class="btn-primary">CONTACT US →</a>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ── SERVICES ── -->
+  <section class="section" id="services">
+    <div class="services-header reveal">
+      <div class="section-eyebrow">
+        <span class="eyebrow-prefix">//</span>
+        OUR SERVICES
+      </div>
+      <h2 class="section-h2">Two ways we work together.</h2>
+    </div>
+    <div class="services-grid">
+      <div class="svc-card reveal">
+        <span class="svc-num">// 01 · VOICE · 24/7</span>
+        <h3 class="svc-title">AI Voice Agents</h3>
+        <p class="svc-desc">Intelligent agents that handle inbound and outbound calls, qualify leads, book appointments, and operate around the clock — no human intervention needed.</p>
+        <a href="voice-agents.html" class="svc-link">LEARN MORE →</a>
+      </div>
+      <div class="svc-card reveal" style="transition-delay:100ms">
+        <span class="svc-num">// 02 · AUDIT → DEPLOY</span>
+        <h3 class="svc-title">AI Operations System</h3>
+        <p class="svc-desc">We audit your operation, map where it breaks, then deploy AI systems that eliminate bottlenecks and scale your output without adding headcount.</p>
+        <a href="operations-system.html" class="svc-link">START WITH THE AUDIT →</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── CONTACT ── -->
+  <section class="section" id="contact" style="border-bottom:none;">
+    <div class="contact-inner">
+
+      <div class="section-eyebrow reveal" style="justify-content:center;">
+        <span class="eyebrow-prefix">//</span>
+        CONTACT
+      </div>
+      <h2 class="contact-h2 reveal" style="transition-delay:80ms">Let's talk.</h2>
+      <p class="contact-sub reveal" style="transition-delay:140ms">Tell us about your business and how we can help you scale with AI.</p>
+
+      <form class="contact-form reveal" id="contact-form" style="transition-delay:200ms">
+
+        <div class="form-notice">
+          <strong>// NOTE —</strong> Every submission gets a genuine read — no filters, no auto-replies. We're deliberate about who we work with, so when we respond, it counts. Expect to hear from us within 24 hours.
+        </div>
+
+        <div class="form-row-2">
+          <div class="form-field">
+            <label class="form-label" for="fname">First Name *</label>
+            <input class="form-input" type="text" id="fname" name="fname" placeholder="John" required />
+          </div>
+          <div class="form-field">
+            <label class="form-label" for="lname">Last Name *</label>
+            <input class="form-input" type="text" id="lname" name="lname" placeholder="Doe" required />
+          </div>
+        </div>
+
+        <div class="form-field">
+          <label class="form-label" for="email">Email Address *</label>
+          <input class="form-input" type="email" id="email" name="email" placeholder="john@company.com" required />
+        </div>
+
+        <div class="form-row-2">
+          <div class="form-field">
+            <label class="form-label" for="company">Company Name *</label>
+            <input class="form-input" type="text" id="company" name="company" placeholder="Acme Inc." required />
+          </div>
+          <div class="form-field">
+            <label class="form-label" for="website">Company Website (optional)</label>
+            <input class="form-input" type="url" id="website" name="website" placeholder="https://acme.com" />
+          </div>
+        </div>
+
+        <div class="form-field">
+          <label class="form-label" for="role">Your Role *</label>
+          <select class="form-select" id="role" name="role" required>
+            <option value="" disabled selected>Select your role</option>
+            <option>Founder / CEO</option>
+            <option>COO / Operations</option>
+            <option>Sales / Business Development</option>
+            <option>Marketing</option>
+            <option>IT / Technology</option>
+            <option>Other</option>
+          </select>
+        </div>
+
+        <div class="form-field">
+          <label class="form-label" for="size">Company Size *</label>
+          <select class="form-select" id="size" name="size" required>
+            <option value="" disabled selected>Select company size</option>
+            <option>1–10 employees</option>
+            <option>11–50 employees</option>
+            <option>51–200 employees</option>
+            <option>201–500 employees</option>
+            <option>500+ employees</option>
+          </select>
+        </div>
+
+        <div class="form-field">
+          <label class="form-label" for="budget">Project Budget *</label>
+          <select class="form-select" id="budget" name="budget" required>
+            <option value="" disabled selected>Select budget range</option>
+            <option>Under $5K</option>
+            <option>$5K – $15K</option>
+            <option>$15K – $50K</option>
+            <option>$50K – $100K</option>
+            <option>$100K+</option>
+          </select>
+        </div>
+
+        <div class="form-field">
+          <label class="form-label" for="help">How can we help? *</label>
+          <textarea class="form-textarea" id="help" name="help" placeholder="Tell us what you're looking to achieve..." required></textarea>
+        </div>
+
+        <div class="form-field">
+          <label class="form-label">What are you hoping to improve with AI? *</label>
+          <div class="checkbox-grid" style="margin-top:8px">
+            <label class="checkbox-item"><input type="checkbox" name="goals[]" value="lead_gen" /><span>Lead generation or sales</span></label>
+            <label class="checkbox-item"><input type="checkbox" name="goals[]" value="support" /><span>Customer support</span></label>
+            <label class="checkbox-item"><input type="checkbox" name="goals[]" value="ops" /><span>Internal operations</span></label>
+            <label class="checkbox-item"><input type="checkbox" name="goals[]" value="data" /><span>Data processing or reporting</span></label>
+            <label class="checkbox-item"><input type="checkbox" name="goals[]" value="content" /><span>Content or marketing workflows</span></label>
+            <label class="checkbox-item"><input type="checkbox" name="goals[]" value="unsure" /><span>Not sure yet</span></label>
+          </div>
+        </div>
+
+        <div class="form-field">
+          <label class="form-label" for="notes">Anything else? (optional)</label>
+          <textarea class="form-textarea" id="notes" name="notes" placeholder="Any additional context..."></textarea>
+        </div>
+
+        <button type="submit" class="form-submit" id="submit-btn">SUBMIT →</button>
+      </form>
+
+      <p class="contact-direct reveal" style="transition-delay:320ms">
+        Or reach us directly: <a href="mailto:contact@opsriseai.com">// contact@opsriseai.com</a>
+      </p>
+
+    </div>
+  </section>
+
+  <!-- ── FOOTER ── -->
+  <footer class="footer">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <a href="#top" class="logo">
+          <span class="logo-bracket">[</span><span class="logo-word">OPS</span><span class="logo-dot">·</span><span class="logo-word">RISE</span><span class="logo-bracket">]</span><span class="logo-period">.</span><span class="logo-ai">AI</span>
+        </a>
+        <p class="footer-tagline">// AI · CONSULTING · OPERATIONS</p>
+      </div>
+    </div>
+    <div class="footer-legal">
+      <span>OPSRISE AI — V1.0 / 2026</span>
+      <span>© 2026 OPSRISE AI · ALL RIGHTS RESERVED</span>
+    </div>
+  </footer>
+
+  <script>
+    // Starfield
+    (function () {
+      const canvas = document.getElementById('hero-starfield');
+      const hero   = document.querySelector('.hero');
+      if (!canvas || !hero) return;
+      const ctx = canvas.getContext('2d');
+
+      const QUANTITY   = 220;
+      const SPEED      = 0.9;
+      const RATIO      = QUANTITY / 2;
+      const STAR_COLOR = 'rgba(244,241,235,0.75)';
+      const BG_FILL    = 'rgba(28,26,23,0.18)';
+
+      let w, h, cx, cy, z, colorRatio, stars = [];
+
+      function measure() {
+        w  = hero.clientWidth;
+        h  = hero.clientHeight;
+        cx = w >> 1;
+        cy = h >> 1;
+        z  = (w + h) / 2;
+        colorRatio = 1 / z;
+      }
+
+      function init() {
+        measure();
+        canvas.width  = w;
+        canvas.height = h;
+        stars = Array.from({ length: QUANTITY }, () => [
+          Math.random() * w * 2 - cx * 2,   // [0] x
+          Math.random() * h * 2 - cy * 2,   // [1] y
+          Math.round(Math.random() * z),     // [2] depth
+          0, 0, 0, 0, true,                  // [3-7] proj x/y, prev x/y, valid
+        ]);
+      }
+
+      function resize() {
+        const ow = canvas.width, oh = canvas.height;
+        measure();
+        if (ow === w && oh === h) return;
+        const rw = w / ow, rh = h / oh;
+        canvas.width = w; canvas.height = h;
+        stars.forEach(s => {
+          s[0] *= rw; s[1] *= rh;
+          s[3] = cx + (s[0] / s[2]) * RATIO;
+          s[4] = cy + (s[1] / s[2]) * RATIO;
+        });
+      }
+
+      function update() {
+        for (const s of stars) {
+          s[7] = true;
+          s[5] = s[3]; s[6] = s[4];
+          s[2] -= SPEED;
+          if (s[2] <= 0) { s[2] += z; s[7] = false; }
+          if (s[2] > z)  { s[2] -= z; s[7] = false; }
+          s[3] = cx + (s[0] / s[2]) * RATIO;
+          s[4] = cy + (s[1] / s[2]) * RATIO;
+        }
+      }
+
+      function draw() {
+        ctx.fillStyle = BG_FILL;
+        ctx.fillRect(0, 0, w, h);
+        ctx.strokeStyle = STAR_COLOR;
+        for (const s of stars) {
+          if (s[5] > 0 && s[5] < w && s[6] > 0 && s[6] < h && s[7]) {
+            ctx.lineWidth = (1 - colorRatio * s[2]) * 2;
+            ctx.beginPath();
+            ctx.moveTo(s[5], s[6]);
+            ctx.lineTo(s[3], s[4]);
+            ctx.stroke();
+          }
+        }
+      }
+
+      function loop() { resize(); update(); draw(); requestAnimationFrame(loop); }
+
+      init();
+      loop();
+    })();
+
+    // Theme
+    const SUN  = `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>`;
+    const MOON = `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>`;
+    const themeToggle = document.getElementById('theme-toggle');
+    if (localStorage.getItem('opsrise-theme') === 'light') document.body.classList.add('light');
+    function syncIcon() { themeToggle.innerHTML = document.body.classList.contains('light') ? MOON : SUN; }
+    syncIcon();
+    themeToggle.addEventListener('click', () => {
+      document.body.classList.toggle('light');
+      localStorage.setItem('opsrise-theme', document.body.classList.contains('light') ? 'light' : 'dark');
+      syncIcon();
+    });
+
+    // Nav scroll state
+    const nav = document.getElementById('nav');
+    window.addEventListener('scroll', () => { nav.classList.toggle('scrolled', window.scrollY > 10); }, { passive: true });
+
+    // Scroll reveal
+    const obs = new IntersectionObserver(entries => entries.forEach(e => {
+      if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); }
+    }), { threshold: 0.12 });
+    document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+    setTimeout(() => document.querySelectorAll('.reveal:not(.visible)').forEach(el => el.classList.add('visible')), 800);
+
+    // Contact form
+    document.getElementById('contact-form').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const btn = document.getElementById('submit-btn');
+      btn.textContent = '✓ SENT';
+      btn.disabled = true;
+    });
+  </script>
+
+</body>
+</html>

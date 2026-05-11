@@ -1,0 +1,24 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8" /><title>Logomark</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=DM+Sans:wght@300;400&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="../colors_and_type.css" />
+<style>
+  html,body{margin:0;padding:0;}
+  body{background:#222;font-family:var(--font-sans);font-weight:300;}
+  .grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:0;width:700px;height:200px;}
+  .cell{display:flex;flex-direction:column;justify-content:center;align-items:center;gap:14px;}
+  .cell.dark{background:var(--dr-ink);color:var(--dr-cream);}
+  .cell.light{background:var(--dr-cream);color:var(--dr-ink);}
+  .cell.ember{background:var(--dr-ember);color:var(--dr-cream);}
+  .cell img{height:64px;width:auto;display:block;}
+  .label{font-family:var(--font-mono);font-size:10px;text-transform:uppercase;letter-spacing:0.14em;opacity:0.75;}
+  .label::before{content:"// ";}
+</style>
+</head><body>
+  <div class="grid">
+    <div class="cell dark"><img src="../assets/DR-logomark-ember.png" alt="" /><span class="label">Ember on Ink</span></div>
+    <div class="cell light"><img src="../assets/DR-logomark-light.png" alt="" /><span class="label">Ink on Cream</span></div>
+    <div class="cell ember"><img src="../assets/DR-logomark-dark.png" alt="" /><span class="label">Cream on Ember</span></div>
+  </div>
+</body></html>

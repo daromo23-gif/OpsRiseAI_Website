@@ -1,0 +1,9 @@
+# Temp and system files
+temporary screenshots/
+*.zip
+*.pdf
+*.jpeg
+*.jpg
+*.png
+CLAUDE*.md
+.claude/

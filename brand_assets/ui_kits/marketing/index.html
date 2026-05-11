@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8" />
+<title>Daniel Rojas — AI · Consultoría · Educación</title>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Silkscreen:wght@400;700&family=DM+Serif+Display:ital@0;1&family=Space+Mono:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500;700&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="../../colors_and_type.css" />
+<style>
+  html, body { margin: 0; padding: 0; }
+  body {
+    background: var(--dr-ink);
+    color: var(--dr-cream);
+    font-family: var(--font-sans);
+    font-weight: 300;
+    -webkit-font-smoothing: antialiased;
+  }
+  section { box-sizing: border-box; }
+</style>
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+</head>
+<body class="dr">
+<div id="root"></div>
+
+<script type="text/babel" src="Nav.jsx"></script>
+<script type="text/babel" src="Hero.jsx"></script>
+<script type="text/babel" src="ProofRow.jsx"></script>
+<script type="text/babel" src="ModuleCard.jsx"></script>
+<script type="text/babel" src="Testimonial.jsx"></script>
+<script type="text/babel" src="CTASection.jsx"></script>
+<script type="text/babel" src="Footer.jsx"></script>
+
+<script type="text/babel">
+const { Nav, Hero, ProofRow, ModuleCard, Testimonial, CTASection, Footer } = window;
+
+const modules = [
+  { num: '01', title: 'Tu voz, no la del modelo', desc: 'Cómo escribir prompts que suenan a ti — no a un email genérico generado por AI.', duration: 'Sem 1', tag: 'Núcleo' },
+  { num: '02', title: 'De entrevista a memo en una hora', desc: 'Captura, transcripción, síntesis. Un flujo que ya uso con clientes reales.', duration: 'Sem 2' },
+  { num: '03', title: 'Propuestas que cierran', desc: 'Templates vivos. Cómo ensamblar una propuesta de Fortune 500 en una tarde.', duration: 'Sem 3', tag: 'Caso real' },
+  { num: '04', title: 'Análisis cuantitativo sin código', desc: 'Excel + Claude + verificación. Modelos financieros sin pelear con Python.', duration: 'Sem 4' },
+  { num: '05', title: 'Tu agente personal', desc: 'Construye un asistente que conoce tus clientes, tu tono y tu calendario.', duration: 'Sem 5', tag: 'Avanzado' },
+  { num: '06', title: 'Demo & feedback en vivo', desc: 'Presentas tu flujo al grupo. Yo te doy feedback como lo daría a un junior partner.', duration: 'Sem 6' },
+];
+
+const App = () => (
+  <>
+    <Nav />
+    <Hero />
+    <ProofRow />
+
+    <section id="modulos" style={{ padding: '96px 32px' }}>
+      <div style={{ maxWidth: 1100, margin: '0 auto' }}>
+        <div style={{ fontFamily: '"Space Mono", monospace', fontSize: 12, letterSpacing: '0.14em', textTransform: 'uppercase', color: '#D85A2B', marginBottom: 18 }}>// PROGRAMA — 6 SEMANAS</div>
+        <h2 style={{ fontFamily: '"DM Serif Display", serif', fontWeight: 400, fontSize: 56, lineHeight: 1.05, color: '#F4F1EB', margin: '0 0 16px', maxWidth: 740 }}>Seis flujos que uso cada semana con clientes reales.</h2>
+        <p style={{ fontFamily: '"DM Sans", sans-serif', fontWeight: 300, fontSize: 18, lineHeight: 1.6, color: '#C9C1B3', maxWidth: 640, margin: '0 0 56px' }}>
+          Nada de teoría. Cada módulo es un flujo concreto que puedes copiar y pegar en tu próxima reunión.
+        </p>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 16 }}>
+          {modules.map(m => <ModuleCard key={m.num} {...m} />)}
+        </div>
+      </div>
+    </section>
+
+    <section id="casos" style={{ padding: '64px 32px 96px', background: '#181613' }}>
+      <div style={{ maxWidth: 880, margin: '0 auto' }}>
+        <div style={{ fontFamily: '"Space Mono", monospace', fontSize: 12, letterSpacing: '0.14em', textTransform: 'uppercase', color: '#D85A2B', marginBottom: 32 }}>// CASOS REALES</div>
+        <div style={{ display: 'grid', gap: 16 }}>
+          <Testimonial num="01" quote="Hoy cerré una propuesta usando este flujo exacto. Tres días de trabajo en una tarde." name="Lucía Mendieta" role="Senior Partner · Consultoría estratégica" />
+          <Testimonial num="02" quote="Pensé que iba a tener que aprender Python. Resulta que solo tenía que aprender a hacer mejores preguntas." name="Carlos Iturralde" role="Director · Banca corporativa" />
+        </div>
+      </div>
+    </section>
+
+    <CTASection />
+    <Footer />
+  </>
+);
+
+ReactDOM.createRoot(document.getElementById('root')).render(<App />);
+</script>
+</body>
+</html>

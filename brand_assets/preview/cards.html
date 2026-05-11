@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8" /><title>Cards</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Space+Mono:wght@400&family=DM+Sans:wght@300;400&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="../colors_and_type.css" />
+<style>
+  html,body{margin:0;padding:0;}
+  body{background:var(--dr-ink);color:var(--dr-cream);font-family:"DM Sans";font-weight:300;}
+  .wrap{width:700px;padding:20px;box-sizing:border-box;display:grid;grid-template-columns:1fr 1fr;gap:14px;}
+  .card{background:#2F2B26;border:1px solid rgba(216,210,200,0.10);border-radius:10px;padding:18px;display:flex;flex-direction:column;gap:8px;}
+  .card.feat{background:transparent;border:1px solid rgba(216,210,200,0.16);}
+  .eyebrow{font-family:"Space Mono";font-size:10px;letter-spacing:0.14em;text-transform:uppercase;color:var(--dr-ember);}
+  .eyebrow::before{content:"// ";opacity:0.7;}
+  h3{font-family:"DM Serif Display";font-weight:400;font-size:22px;margin:0;line-height:1.15;}
+  p{font-size:13px;line-height:1.5;color:#C9C1B3;margin:0;}
+  .meta{display:flex;gap:8px;margin-top:auto;}
+  .pill{background:rgba(248,196,176,0.12);color:var(--dr-ember-light);font-family:"Space Mono";font-size:10px;letter-spacing:0.10em;text-transform:uppercase;padding:4px 8px;border-radius:999px;}
+  .num{font-family:"Silkscreen";font-weight:700;font-size:36px;line-height:1;color:var(--dr-ember);}
+</style>
+</head><body>
+  <div class="wrap">
+    <div class="card">
+      <div class="eyebrow">Caso real</div>
+      <h3>De propuesta a contrato en 48 h</h3>
+      <p>Un consultor cierra a un cliente Fortune 500 con un flujo de tres prompts.</p>
+      <div class="meta"><span class="pill">12 MIN</span><span class="pill">SIN CÓDIGO</span></div>
+    </div>
+    <div class="card feat">
+      <div class="eyebrow">Módulo 02</div>
+      <div class="num">02</div>
+      <h3>Diagnóstico con AI</h3>
+      <p>Convierte una entrevista de cliente en un brief estructurado en minutos.</p>
+    </div>
+  </div>
+</body></html>

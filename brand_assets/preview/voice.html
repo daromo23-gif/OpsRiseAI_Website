@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8" /><title>Voice — Sí / No</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300&family=Space+Mono:wght@400&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="../colors_and_type.css" />
+<style>
+  html,body{margin:0;padding:0;}
+  body{background:var(--dr-ink);color:var(--dr-cream);font-family:"DM Sans";font-weight:300;}
+  .wrap{width:700px;padding:18px 24px;box-sizing:border-box;}
+  .row{display:grid;grid-template-columns:34px 1fr;gap:10px;align-items:center;padding:8px 12px;border:1px solid rgba(216,210,200,0.12);border-radius:6px;margin-bottom:8px;}
+  .row.yes{background:rgba(216,90,43,0.10);border-color:rgba(216,90,43,0.4);}
+  .row.no{background:rgba(255,255,255,0.02);}
+  .tag{font-family:"Space Mono";font-size:10px;letter-spacing:0.14em;text-transform:uppercase;}
+  .tag.yes{color:var(--dr-ember);}
+  .tag.no{color:var(--dr-stone);}
+  .copy{font-size:14px;line-height:1.4;}
+  .copy.no{color:var(--dr-stone);text-decoration:line-through;text-decoration-color:rgba(140,131,119,0.5);}
+</style>
+</head><body>
+  <div class="wrap">
+    <div class="row yes"><span class="tag yes">SÍ</span><span class="copy">"Hoy cerré una propuesta usando este flujo exacto."</span></div>
+    <div class="row yes"><span class="tag yes">SÍ</span><span class="copy">"Sin código. Sin perder tu voz."</span></div>
+    <div class="row no"><span class="tag no">NO</span><span class="copy no">"La IA va a revolucionar el mundo."</span></div>
+    <div class="row no" style="margin-bottom:0;"><span class="tag no">NO</span><span class="copy no">"Soy apasionado por la tecnología."</span></div>
+  </div>
+</body></html>

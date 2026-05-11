@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>DR — Preview base</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Silkscreen:wght@400;700&family=DM+Serif+Display:ital@0;1&family=Space+Mono:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500;700&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="../colors_and_type.css" />
+<style>
+  html, body { margin: 0; padding: 0; }
+  body {
+    background: var(--bg);
+    color: var(--fg-1);
+    font-family: var(--font-sans);
+    font-weight: 300;
+    -webkit-font-smoothing: antialiased;
+  }
+  .card {
+    box-sizing: border-box;
+    padding: 20px 24px;
+    width: 700px;
+    min-height: 0;
+  }
+  .card.light {
+    background: var(--dr-cream);
+    color: var(--dr-ink);
+  }
+  .card.ink {
+    background: var(--dr-ink);
+    color: var(--dr-cream);
+  }
+  .card.ember {
+    background: var(--dr-ember);
+    color: var(--dr-cream);
+  }
+  .row { display: flex; gap: 12px; align-items: stretch; }
+  .col { display: flex; flex-direction: column; gap: 12px; }
+  .grow { flex: 1; }
+  .label {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    color: var(--dr-stone);
+  }
+  .label.ember { color: var(--dr-ember); }
+  .label.ember::before { content: "// "; opacity: 0.7; }
+  .mono { font-family: var(--font-mono); }
+  .serif { font-family: var(--font-serif); font-weight: 400; }
+  .display { font-family: var(--font-display); font-weight: 700; text-transform: uppercase; }
+</style>
+</head>
+<body class="dr">
+  <div class="card">Empty preview base — extend in card files.</div>
+</body>
+</html>

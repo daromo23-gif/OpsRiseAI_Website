@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8" /><title>Elevation</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="../colors_and_type.css" />
+<style>
+  html,body{margin:0;padding:0;}
+  body{background:var(--dr-ink);color:var(--dr-cream);font-family:"DM Sans";font-weight:300;}
+  .wrap{width:700px;padding:24px;box-sizing:border-box;display:grid;grid-template-columns:repeat(4,1fr);gap:18px;}
+  .cell{display:flex;flex-direction:column;align-items:center;gap:10px;}
+  .box{width:120px;height:64px;background:#2F2B26;border:1px solid rgba(216,210,200,0.12);border-radius:8px;}
+  .name{font-family:"Space Mono";font-size:10px;letter-spacing:0.10em;text-transform:uppercase;color:var(--dr-stone);}
+  .desc{font-family:"Space Mono";font-size:9px;color:var(--dr-stone);text-align:center;}
+  .e1{box-shadow:0 1px 0 rgba(0,0,0,0.20);}
+  .e2{box-shadow:0 2px 8px rgba(0,0,0,0.30);}
+  .e3{box-shadow:0 8px 24px rgba(0,0,0,0.40);}
+  .ember{background:var(--dr-ember);border-color:transparent;box-shadow:0 0 0 1px rgba(216,90,43,0.35),0 6px 20px rgba(216,90,43,0.30);}
+</style>
+</head><body>
+  <div class="wrap">
+    <div class="cell"><div class="box e1"></div><div class="name">shadow-1</div><div class="desc">hairline</div></div>
+    <div class="cell"><div class="box e2"></div><div class="name">shadow-2</div><div class="desc">popover</div></div>
+    <div class="cell"><div class="box e3"></div><div class="name">shadow-3</div><div class="desc">modal</div></div>
+    <div class="cell"><div class="box ember"></div><div class="name">ember</div><div class="desc">CTA glow</div></div>
+  </div>
+</body></html>

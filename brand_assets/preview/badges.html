@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8" /><title>Badges & tags</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400&family=DM+Sans:wght@300&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="../colors_and_type.css" />
+<style>
+  html,body{margin:0;padding:0;}
+  body{background:var(--dr-ink);color:var(--dr-cream);font-family:var(--font-sans);}
+  .wrap{width:700px;padding:22px 24px;box-sizing:border-box;display:flex;flex-wrap:wrap;gap:10px;}
+  .b{font-family:"Space Mono";font-size:10px;letter-spacing:0.14em;text-transform:uppercase;padding:5px 10px;border-radius:3px;display:inline-flex;align-items:center;gap:6px;}
+  .b1{background:#F8C4B0;color:#1C1A17;}
+  .b2{background:rgba(216,90,43,0.15);color:#D85A2B;border:1px solid rgba(216,90,43,0.4);}
+  .b3{background:transparent;color:var(--dr-cream);border:1px solid rgba(216,210,200,0.22);}
+  .b4{background:#D85A2B;color:#F4F1EB;}
+  .b5{background:transparent;color:var(--dr-stone);}
+  .b5::before{content:"// ";color:var(--dr-ember);}
+  .pill{border-radius:999px;}
+</style>
+</head><body>
+  <div class="wrap">
+    <span class="b b1">Nuevo</span>
+    <span class="b b2">En vivo</span>
+    <span class="b b3">PRO</span>
+    <span class="b b4">— 30%</span>
+    <span class="b b5">CASO REAL</span>
+    <span class="b b1 pill">AI</span>
+    <span class="b b3 pill">Sin código</span>
+    <span class="b b2 pill">Próximamente</span>
+  </div>
+</body></html>

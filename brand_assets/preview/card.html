@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8" /><title>Card</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=DM+Sans:wght@300&family=Space+Mono:wght@400&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="../colors_and_type.css" />
+<style>
+  html,body{margin:0;padding:0;}
+  body{background:var(--dr-ink);color:var(--dr-cream);font-family:"DM Sans";font-weight:300;}
+  .wrap{width:700px;padding:22px 24px;box-sizing:border-box;display:grid;grid-template-columns:1fr 1fr;gap:14px;}
+  .card{background:#2F2B26;border:1px solid rgba(216,210,200,0.12);border-radius:10px;padding:16px 18px;}
+  .card.hi{border-color:rgba(216,90,43,0.4);background:#322723;}
+  .eyebrow{font-family:"Space Mono";font-size:10px;letter-spacing:0.14em;text-transform:uppercase;color:var(--dr-ember);margin-bottom:8px;}
+  .eyebrow::before{content:"// ";opacity:0.7;}
+  h3{font-family:"DM Serif Display";font-weight:400;font-size:22px;margin:0 0 6px;line-height:1.15;}
+  p{font-size:13px;line-height:1.55;color:#C9C1B3;margin:0;}
+  .meta{display:flex;gap:10px;margin-top:14px;font-family:"Space Mono";font-size:10px;color:var(--dr-stone);text-transform:uppercase;letter-spacing:0.10em;}
+  .meta span::before{content:"·";margin-right:8px;color:var(--dr-stone);}
+  .meta span:first-child::before{content:"";margin:0;}
+</style>
+</head><body>
+  <div class="wrap">
+    <div class="card">
+      <div class="eyebrow">Caso real</div>
+      <h3>De propuesta a contrato en 4 horas</h3>
+      <p>Cómo armé un flujo en Notion + Claude para reducir el tiempo de propuestas de 3 días a una tarde.</p>
+      <div class="meta"><span>Lectura · 6 min</span><span>Mar 2026</span></div>
+    </div>
+    <div class="card hi">
+      <div class="eyebrow">Próximo cohort</div>
+      <h3>Aula — Septiembre</h3>
+      <p>6 semanas. Grupos de 12. Horas reales con Daniel.</p>
+      <div class="meta"><span>4 plazas</span><span>Inscripción abierta</span></div>
+    </div>
+  </div>
+</body></html>

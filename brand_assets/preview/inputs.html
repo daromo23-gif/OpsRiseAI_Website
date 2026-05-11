@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8" /><title>Inputs</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400&family=DM+Sans:wght@300;400&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="../colors_and_type.css" />
+<style>
+  html,body{margin:0;padding:0;}
+  body{background:var(--dr-ink);color:var(--dr-cream);font-family:"DM Sans";font-weight:300;}
+  .wrap{width:700px;padding:22px 24px;box-sizing:border-box;display:grid;grid-template-columns:1fr 1fr;gap:18px;}
+  .field{display:flex;flex-direction:column;gap:6px;}
+  .label{font-family:"Space Mono";font-size:10px;letter-spacing:0.14em;text-transform:uppercase;color:var(--dr-stone);}
+  input,textarea,select{background:transparent;border:1px solid rgba(216,210,200,0.18);border-radius:4px;padding:11px 12px;color:var(--dr-cream);font-family:"DM Sans";font-size:14px;font-weight:300;outline:none;transition:border-color 200ms;}
+  input:focus,textarea:focus,select:focus{border-color:var(--dr-ember);box-shadow:0 0 0 2px rgba(216,90,43,0.20);}
+  input::placeholder{color:var(--dr-stone);}
+  .hint{font-family:"Space Mono";font-size:10px;letter-spacing:0.04em;color:var(--dr-stone);}
+  .err{color:var(--dr-ember);}
+  .err-input{border-color:var(--dr-ember)!important;}
+</style>
+</head><body>
+  <div class="wrap">
+    <div class="field"><span class="label">Email</span><input value="daniel@danielrojas.ai" /></div>
+    <div class="field"><span class="label">Nombre</span><input placeholder="¿Cómo te llamas?" /></div>
+    <div class="field"><span class="label">Empresa</span><input placeholder="Opcional" /><span class="hint">// Texto de ayuda monoespaciado</span></div>
+    <div class="field"><span class="label">Tu reto</span><input class="err-input" value="" placeholder="Cuéntame en una frase" /><span class="hint err">// Campo requerido</span></div>
+  </div>
+</body></html>
