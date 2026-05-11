@@ -210,7 +210,7 @@
 
   <!-- ── NAV ── -->
   <nav class="nav" id="nav">
-    <a href="#top" class="logo" aria-label="OpsRise AI — home">
+    <a href="index.html" class="logo" aria-label="OpsRise AI — home">
       <span class="logo-bracket">[</span><span class="logo-word">OPS</span><span class="logo-dot">·</span><span class="logo-word">RISE</span><span class="logo-bracket">]</span><span class="logo-period">.</span><span class="logo-ai">AI</span>
     </a>
     <div class="nav-right">
@@ -401,7 +401,7 @@
           <textarea class="form-textarea" id="notes" name="notes" placeholder="Any additional context..."></textarea>
         </div>
 
-        <button type="submit" class="form-submit" id="submit-btn">SUBMIT →</button>
+        <button type="submit" class="form-submit" id="submit-btn">SEND MESSAGE →</button>
       </form>
 
       <p class="contact-direct reveal" style="transition-delay:320ms">
@@ -559,7 +559,7 @@
     document.getElementById('contact-form').addEventListener('submit', async function(e) {
       e.preventDefault();
       const btn = document.getElementById('submit-btn');
-      btn.textContent = 'SENDING…';
+      btn.textContent = '// TRANSMITTING…';
       btn.disabled = true;
       try {
         const res = await fetch('https://formspree.io/f/xzdoobej', {
@@ -569,13 +569,13 @@
         });
         if (res.ok) {
           this.reset();
-          btn.textContent = '✓ SENT — WE\'LL BE IN TOUCH';
+          btn.textContent = '// RECEIVED — WE\'LL BE IN TOUCH';
         } else {
-          btn.textContent = 'ERROR — TRY AGAIN';
+          btn.textContent = 'FAILED — RETRY →';
           btn.disabled = false;
         }
       } catch {
-        btn.textContent = 'ERROR — TRY AGAIN';
+        btn.textContent = 'FAILED — RETRY →';
         btn.disabled = false;
       }
     });
