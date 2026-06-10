@@ -1,0 +1,7 @@
+{
+  "name": "opsrise-website",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "OpsRise AI marketing site with Claude-powered chat widget"
+}
