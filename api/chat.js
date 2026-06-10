@@ -63,7 +63,17 @@ export default async function handler(req, res) {
     if (!apiRes.ok) {
       const detail = await apiRes.text();
       console.error('Anthropic API error:', apiRes.status, detail);
-      return res.status(502).json({ error: 'The assistant had trouble responding. Please try again.' });
+      // Surface the upstream reason so configuration issues (e.g. low credit
+      // balance, invalid key, model access) are diagnosable from the client.
+      let reason = '';
+      try {
+        reason = JSON.parse(detail)?.error?.message || '';
+      } catch {
+        reason = detail.slice(0, 200);
+      }
+      return res.status(502).json({
+        error: `The assistant had trouble responding (Anthropic ${apiRes.status})${reason ? ': ' + reason : ''}`,
+      });
     }
 
     const data = await apiRes.json();
